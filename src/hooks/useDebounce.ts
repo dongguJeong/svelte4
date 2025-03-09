@@ -1,14 +1,8 @@
-import { onDestroy } from 'svelte';
-
 export function useDebounce(callback: Function, delay: number) {
-	console.log('디바운스');
-	let timeout: number;
+	let timeId: number;
 
-	const debouncedFunction = () => {
-		clearTimeout(timeout);
-		timeout = setTimeout(callback, delay);
+	return (...args: any) => {
+		if (timeId) clearTimeout(timeId);
+		timeId = setTimeout(callback, delay, ...args);
 	};
-	onDestroy(() => {
-		clearTimeout(timeout);
-	});
 }

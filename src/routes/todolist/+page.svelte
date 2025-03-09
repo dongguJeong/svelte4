@@ -71,6 +71,7 @@
 	};
 
 	const changeTodo = (e: Event) => {
+		console.log('change');
 		const ID = e.target.parentElement.id;
 		const newText = e.target.value;
 
@@ -82,9 +83,12 @@
 				  }
 				: todo
 		);
+
 		saveTodos(newTodos);
 		fetchTodo();
 	};
+
+	const debouncedChangeTodo = useDebounce(changeTodo, 200);
 </script>
 
 <section>
@@ -102,11 +106,7 @@
 			{#each todos as todo}
 				<li class="main_todo_item" id={todo.id}>
 					<input type="checkbox" on:click={checkTodo} bind:checked={todo.done} />
-					<input
-						type="text"
-						bind:value={todo.text}
-						on:change={(e) => useDebounce(changeTodo, 200)}
-					/>
+					<input type="text" bind:value={todo.text} on:change={debouncedChangeTodo} />
 					<span class:done={todo.done}>{todo.id}</span>
 					<button on:click={deleteTodo}>🗑️</button>
 				</li>
