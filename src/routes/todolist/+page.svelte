@@ -51,6 +51,7 @@
 
 	const checkTodo = (e: Event) => {
 		const ID = e.target.parentElement.id;
+		console.log(ID);
 		const newTodos = todos.map((todo) =>
 			todo.id === ID
 				? {
@@ -69,8 +70,8 @@
 	};
 
 	const changeTodo = (e: Event) => {
-		console.log(e);
 		const ID = e.target.parentElement.id;
+		console.log(ID);
 		const newText = e.target.value;
 
 		const newTodos = todos.map((todo) =>
@@ -93,9 +94,8 @@
 		const day = newDate.getDate();
 		const hour = newDate.getHours();
 		const minute = newDate.getMinutes();
-		const second = newDate.getSeconds();
 
-		return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분 ${second}초`;
+		return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
 	};
 </script>
 
@@ -112,7 +112,7 @@
 		</form>
 		<ul class="main_todo_list">
 			{#each todos as { id, done, text } (id)}
-				<li class="main_todo_item">
+				<li class="main_todo_item" {id}>
 					<input type="checkbox" on:click={checkTodo} bind:checked={done} />
 					<input type="text" class:done bind:value={text} on:change={changeTodo} />
 					<span class:done>{koreaDate(id)}</span>
@@ -132,7 +132,7 @@
 		padding: 20px 20px;
 		gap: 20px;
 		min-height: 300px;
-		width: 540px;
+		max-width: 540px;
 		overflow-y: auto;
 
 		form {
@@ -223,6 +223,12 @@
 				text-decoration: line-through;
 				color: var(--gray);
 			}
+		}
+	}
+
+	@media screen and (max-width: 640px) {
+		.main_todo_list span {
+			display: none;
 		}
 	}
 </style>

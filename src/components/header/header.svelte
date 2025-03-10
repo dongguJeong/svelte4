@@ -1,33 +1,42 @@
 <script lang="ts">
-    import HeaderTitle from "./header-title.svelte";
-    import HeaderInput from "./header-input.svelte";
-    import HeaderButtons from "./header-buttons.svelte";
+	import HeaderTitle from './header-title.svelte';
+	import HeaderInput from './header-input.svelte';
+	import HeaderButtons from './header-buttons.svelte';
 </script>
 
 <header class="header">
-    <HeaderTitle/>
-    <div class="header_right">
-        <HeaderInput/>
-        <HeaderButtons/>
-    </div>
-    </header>
+	<HeaderTitle />
+	<div class="header_right">
+		<HeaderInput />
+		<HeaderButtons />
+	</div>
+</header>
+
 <style lang="scss">
+	.header {
+		display: flex;
+		align-items: center;
+		background: #fff;
+		width: 100%;
+		padding-right: 40px;
+		gap: 80px;
+	}
 
-.header{
-    display: flex;
-    align-items: center;
-    background: #fff;
-    width : 100%;
-    padding-right : 40px;
-    gap : 80px;
-}
+	.header_right {
+		display: flex;
+		flex: 1;
+		align-items: center;
+		justify-content: space-between;
+		width: 100%;
+	}
 
-.header_right{
-    display: flex;
-    flex : 1;
-    align-items: center;
-    justify-content: space-between;
-    width : 100%;
-}
-
+	@media screen and (max-width: 1024px) {
+		.header_title {
+			width: auto;
+		}
+		.header {
+			gap: 0;
+			justify-content: space-between;
+		}
+	}
 </style>

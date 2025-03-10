@@ -107,4 +107,19 @@
 			}
 		}
 	}
+
+	@media screen and (max-width: 640px) {
+		thead {
+			display: none;
+		}
+
+		h1 {
+			margin-top: 20px;
+		}
+
+		tbody {
+			display: flex;
+			flex-direction: column;
+		}
+	}
 </style>
