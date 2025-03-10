@@ -68,6 +68,8 @@
 </section>
 
 <style lang="scss">
+	@use '../../style/mixin' as *;
+
 	.main_table_container {
 		background-color: white;
 		border-radius: 10px;
@@ -108,7 +110,7 @@
 		}
 	}
 
-	@media screen and (max-width: 640px) {
+	@include small {
 		thead {
 			display: none;
 		}

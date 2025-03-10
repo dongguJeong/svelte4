@@ -11,6 +11,7 @@
 </button>
 
 <style lang="scss">
+	@import '../../style/mixin';
 	button {
 		cursor: pointer;
 		position: relative;
@@ -39,7 +40,7 @@
 		z-index: 10;
 	}
 
-	@media screen and (max-width: 640px) {
+	@include small {
 		button:first-child {
 			display: none;
 		}

@@ -23,6 +23,7 @@
 </tr>
 
 <style lang="scss">
+	@use '../../style/mixin' as *;
 	tr {
 		border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 		color: #868e96;
@@ -65,7 +66,7 @@
 		background: linear-gradient(#fdb686 0%, #ff9a8d 100%);
 	}
 
-	@media screen and (max-width: 640px) {
+	@include small {
 		tr {
 			display: flex;
 			flex-direction: column;

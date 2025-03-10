@@ -9,6 +9,7 @@
 </div>
 
 <style lang="scss">
+	@import '../../style/mixin';
 	.header_profile {
 		display: flex;
 		align-items: center;
@@ -37,7 +38,7 @@
 		}
 	}
 
-	@media screen and (max-width: 640px) {
+	@include small {
 		.header_profile {
 			span {
 				display: none;

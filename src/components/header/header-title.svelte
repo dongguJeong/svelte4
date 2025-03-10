@@ -3,6 +3,7 @@
 </div>
 
 <style lang="scss">
+	@import '../../style/mixin';
 	.header_title {
 		width: 360px;
 		display: flex;
@@ -16,7 +17,7 @@
 		}
 	}
 
-	@media screen and (max-width: 1024px) {
+	@include medium {
 		.header_title {
 			width: 200px;
 		}

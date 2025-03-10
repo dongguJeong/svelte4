@@ -49,6 +49,7 @@
 </section>
 
 <style lang="scss">
+	@import '../../style/mixin.scss';
 	.header_buttons {
 		display: flex;
 		align-items: center;
@@ -85,19 +86,13 @@
 		z-index: 10;
 	}
 
-	@media screen and (max-width: 1024px) {
+	@include medium {
 		.header_buttons {
 			gap: 5px;
 		}
 	}
 
-	@media screen and (max-width: 950px) {
-		.header_buttons {
-			gap: 5px;
-		}
-	}
-
-	@media screen and (max-width: 640px) {
+	@include small {
 		.header_buttons {
 			gap: 10px;
 		}

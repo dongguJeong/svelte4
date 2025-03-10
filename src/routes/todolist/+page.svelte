@@ -124,6 +124,7 @@
 </section>
 
 <style lang="scss">
+	@import '../../style/mixin';
 	section {
 		display: flex;
 		flex-direction: column;
@@ -213,10 +214,9 @@
 				button:hover {
 					background-color: rgba(0, 0, 0, 0.1);
 				}
-			}
-
-			li:hover div {
-				visibility: visible;
+				&:hover div {
+					visibility: visible;
+				}
 			}
 
 			.done {
@@ -226,7 +226,7 @@
 		}
 	}
 
-	@media screen and (max-width: 640px) {
+	@include small {
 		.main_todo_list span {
 			display: none;
 		}

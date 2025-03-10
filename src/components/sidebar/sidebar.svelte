@@ -14,6 +14,7 @@
 </aside>
 
 <style lang="scss">
+	@import '../../style/mixin';
 	.sidebar {
 		display: flex;
 		flex-direction: column;
@@ -24,7 +25,7 @@
 		height: 100%;
 	}
 
-	@media screen and (max-width: 1024px) {
+	@include medium {
 		.sidebar {
 			z-index: 1000;
 			position: fixed;

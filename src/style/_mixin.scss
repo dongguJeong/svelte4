@@ -1,0 +1,13 @@
+@import './variable';
+
+@mixin medium {
+	@media screen and (max-width : #{$breakpoint-medium}) {
+		@content;
+	}
+}
+
+@mixin small {
+	@media screen and (max-width: 640px) {
+		@content;
+	}
+}

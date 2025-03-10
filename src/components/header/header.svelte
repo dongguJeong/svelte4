@@ -13,6 +13,7 @@
 </header>
 
 <style lang="scss">
+	@import '../../style/mixin';
 	.header {
 		display: flex;
 		align-items: center;
@@ -30,7 +31,7 @@
 		width: 100%;
 	}
 
-	@media screen and (max-width: 1024px) {
+	@include medium {
 		.header_title {
 			width: auto;
 		}
