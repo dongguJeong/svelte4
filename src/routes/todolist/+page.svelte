@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { Title } from '../../components/title';
-	import { useDebounce } from '../../hooks/useDebounce';
 
 	interface ITodo {
 		text: string;
@@ -23,7 +22,6 @@
 	});
 
 	const handleSubmit = (e: Event) => {
-		e.preventDefault();
 		if (!newTodo) {
 			return;
 		}
@@ -53,7 +51,7 @@
 
 	const checkTodo = (e: Event) => {
 		const ID = e.target.parentElement.id;
-		todos = todos.map((todo) =>
+		const newTodos = todos.map((todo) =>
 			todo.id === ID
 				? {
 						...todo,
@@ -61,7 +59,7 @@
 				  }
 				: todo
 		);
-		const newTodos = todos.filter((todo) => todo.id !== ID);
+
 		saveTodos(newTodos);
 		fetchTodo();
 	};
@@ -71,7 +69,7 @@
 	};
 
 	const changeTodo = (e: Event) => {
-		console.log('change');
+		console.log(e);
 		const ID = e.target.parentElement.id;
 		const newText = e.target.value;
 
@@ -88,13 +86,23 @@
 		fetchTodo();
 	};
 
-	const debouncedChangeTodo = useDebounce(changeTodo, 200);
+	const koreaDate = (date: string) => {
+		const newDate = new Date(Number(date));
+		const year = newDate.getFullYear();
+		const month = newDate.getMonth() + 1;
+		const day = newDate.getDate();
+		const hour = newDate.getHours();
+		const minute = newDate.getMinutes();
+		const second = newDate.getSeconds();
+
+		return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분 ${second}초`;
+	};
 </script>
 
 <section>
 	<div class="main_todo">
 		<Title title="TodoList" />
-		<form class="main_todo_form" on:submit={handleSubmit}>
+		<form class="main_todo_form" on:submit|preventDefault={handleSubmit}>
 			<input
 				class="main_todo_input"
 				type="text"
@@ -103,11 +111,11 @@
 			/>
 		</form>
 		<ul class="main_todo_list">
-			{#each todos as todo}
-				<li class="main_todo_item" id={todo.id}>
-					<input type="checkbox" on:click={checkTodo} bind:checked={todo.done} />
-					<input type="text" bind:value={todo.text} on:change={debouncedChangeTodo} />
-					<span class:done={todo.done}>{todo.id}</span>
+			{#each todos as { id, done, text } (id)}
+				<li class="main_todo_item">
+					<input type="checkbox" on:click={checkTodo} bind:checked={done} />
+					<input type="text" class:done bind:value={text} on:change={changeTodo} />
+					<span class:done>{koreaDate(id)}</span>
 					<button on:click={deleteTodo}>🗑️</button>
 				</li>
 			{/each}
@@ -185,7 +193,7 @@
 				}
 
 				span {
-					font-size: 14px;
+					font-size: 13px;
 					color: var(--gray);
 					position: absolute;
 					bottom: 0;
@@ -213,6 +221,7 @@
 
 			.done {
 				text-decoration: line-through;
+				color: var(--gray);
 			}
 		}
 	}
