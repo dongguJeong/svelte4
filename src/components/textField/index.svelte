@@ -10,9 +10,10 @@
 	export let required: boolean = false;
 	export let size: 'large' | 'medium' | 'small' = 'large';
 	export let mode: 'standard' | 'filled' | 'outlined' = 'standard';
+	export let style: string = '';
 </script>
 
-<div class="text-field">
+<div class="text-field" {style}>
 	{#if label}
 		<p>{label}</p>
 	{/if}
@@ -29,12 +30,9 @@
 <style lang="scss">
 	.text-field {
 		width: 100%;
-		height: 100%;
-
 		div {
 			display: flex;
 			align-items: center;
-
 			padding: 0 10px;
 
 			&.standard {
@@ -51,6 +49,10 @@
 				background: white;
 				border: 1.5px solid var(--ouline-border-gray);
 				border-radius: 5px;
+
+				&:focus-within {
+					border: 1.5px solid var(--skyblue);
+				}
 			}
 		}
 

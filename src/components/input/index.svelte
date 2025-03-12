@@ -4,7 +4,7 @@
 	export let defaultValue: string = '';
 	export let placeholder: string = '';
 	export let type: string = 'text';
-	export let disabled: boolean = false;
+	export let disabled: boolean = true;
 	export let required: boolean = false;
 	export let size: 'large' | 'medium' | 'small' = 'medium';
 	export let mode: 'standard' | 'filled' | 'outlined' = 'standard';
@@ -45,6 +45,11 @@
 		width: 100%;
 		border: none;
 		background-color: inherit;
+
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
 
 		&.large {
 			padding: 10px;

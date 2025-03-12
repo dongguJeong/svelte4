@@ -1,8 +1,9 @@
 <script lang="ts">
+	export let style: string = '';
 	export let title;
 </script>
 
-<div class="header_title">
+<div class="header_title" {style}>
 	<h1>{title}</h1>
 </div>
 

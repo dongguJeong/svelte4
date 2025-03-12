@@ -1,16 +1,76 @@
 <script lang="ts">
-	import SidebarNav from './sidebar-nav.svelte';
-	import SidebarProfile from './sidebar-profile.svelte';
-	import SidebarButton from './sidebar-button.svelte';
 	import { open } from '../../store/sidebar-store';
+	import { Avatar } from '../avatar';
+	import { Button } from '../button';
+	import type { ISidebarNavItem } from '.';
+	import SidebarNavItem from './sidebar-nav-item.svelte';
 
 	const isOpen = open;
+
+	const SIDEBAR_ITEMS: ISidebarNavItem[] = [
+		{
+			title: 'Dashboard',
+			icon: '/svg/home.svg',
+			url: '/'
+		},
+		{
+			title: 'TodoList',
+			icon: '/svg/table.svg',
+			url: '/todolist'
+		},
+		{
+			title: 'UI Elements',
+			icon: '/svg/tools.svg',
+			url: '#'
+		},
+		{
+			title: 'Components',
+			icon: '/svg/components.svg',
+			url: '#'
+		},
+		{
+			title: 'Forms Stuff',
+			icon: '/svg/input.svg',
+			url: '#'
+		},
+		{
+			title: 'Icons',
+			icon: '/svg/icons.svg',
+			url: '#'
+		},
+		{
+			title: 'Sample Page',
+			icon: '/svg/desktop.svg',
+			url: '#'
+		},
+		{
+			title: 'Extra',
+			icon: '/svg/file.svg',
+			url: '#'
+		}
+	];
 </script>
 
 <aside class="sidebar" class:open={$isOpen}>
-	<SidebarProfile />
-	<SidebarNav />
-	<SidebarButton title="Add Project" />
+	<div class="sidebar_profile">
+		<Avatar src="/svg/picachu.png" border="gray" width={40} height={40} />
+		<div>
+			<span>정동구</span>
+			<span>fronend developer</span>
+		</div>
+	</div>
+
+	<nav>
+		{#each SIDEBAR_ITEMS as item}
+			<SidebarNavItem title={item.title} icon={item.icon} url={item.url} />
+		{/each}
+	</nav>
+
+	<Button variant="primary" size="medium">
+		<div class="sidebar_big_botton">
+			<span>Add Project</span>
+		</div>
+	</Button>
 </aside>
 
 <style lang="scss">
@@ -23,6 +83,34 @@
 		padding: 60px 40px;
 		width: var(--sidebar-width);
 		height: 100%;
+
+		.sidebar_profile {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+
+			div {
+				display: flex;
+				flex-direction: column;
+
+				span:nth-child(2) {
+					color: var(--gray);
+					font-size: 14px;
+				}
+			}
+		}
+
+		nav {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px;
+			color: var(--gray);
+		}
+	}
+
+	.sidebar_big_botton {
+		padding: 5px;
 	}
 
 	@include medium {
@@ -38,6 +126,11 @@
 
 		.open {
 			left: 0px !important;
+		}
+
+		.sidebar_big_botton_span {
+			color: white;
+			font-weight: 500;
 		}
 	}
 </style>

@@ -60,7 +60,7 @@
 		<div class="header_buttons">
 			<Button onClick={() => {}} variant="ghost">
 				<div class="header_profile">
-					<Avatar src="/svg/picachu.png" width={20} height={20} />
+					<Avatar src="/svg/picachu.png" border="gray" width={20} height={20} />
 					<span>정동구</span>
 					<img src="/svg/triangle.svg" alt="triangle" />
 				</div>
@@ -122,6 +122,7 @@
 			display: flex;
 			gap: 10px;
 			align-items: center;
+			font-size: 14px;
 			span {
 				color: var(--gray);
 			}

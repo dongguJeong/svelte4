@@ -1,22 +1,15 @@
 <script lang="ts">
-	export let variant:
-		| 'primary'
-		| 'secondary'
-		| 'destuctive'
-		| 'outline'
-		| 'ghost'
-		| 'icon'
-		| 'link'
-		| undefined = 'primary';
+	export let variant: 'primary' | 'secondary' | 'destuctive' | 'outline' | 'ghost' | undefined =
+		'primary';
 	export let disabled: boolean | undefined = false;
 	export let size: 'small' | 'medium' | 'large' | undefined = 'medium';
-	export let className: string | undefined = '';
-
+	export let style: string = '';
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
-	export let onClick: (event: MouseEvent) => void | undefined = undefined;
+
+	export let onClick: ((event: MouseEvent) => void) | undefined = undefined;
 </script>
 
-<button on:click={onClick} {type} {disabled} class={`${size} ${variant} ${className}`}>
+<button on:click={onClick} {type} {disabled} class={`${size} ${variant}`} {style}>
 	<slot />
 </button>
 
@@ -25,10 +18,10 @@
 		border: 0;
 		outline: none;
 		position: relative;
-
 		display: flex;
 		align-items: center;
 		text-align: center;
+		justify-content: center;
 		cursor: pointer;
 		border-radius: var(--border-md);
 
@@ -49,7 +42,7 @@
 
 		&.primary {
 			background-color: var(--skyblue);
-
+			color: white;
 			&:hover {
 				background-color: var(--skyblue);
 			}
