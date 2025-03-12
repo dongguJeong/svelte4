@@ -1,5 +1,9 @@
+<script lang="ts">
+	export let title;
+</script>
+
 <div class="header_title">
-	<h1>blueBox</h1>
+	<h1>{title}</h1>
 </div>
 
 <style lang="scss">
