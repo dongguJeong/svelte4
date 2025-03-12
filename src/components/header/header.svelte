@@ -66,14 +66,14 @@
 				</div>
 			</Button>
 
-			{#each Buttons as button}
-				<Button onClick={button.onClick ?? (() => {})} variant="ghost">
-					{#if button.badge}
+			{#each Buttons as { src, alt, badge, onClick }, i}
+				<Button onClick={onClick ?? (() => {})} variant="ghost">
+					{#if badge}
 						<Badge variant="destructive">
 							<div class="red_badge" />
 						</Badge>
 					{/if}
-					<img class="header__buttons_image" src={button.src} alt={button.alt} />
+					<img class="header__buttons_image" {src} {alt} />
 				</Button>
 			{/each}
 		</div>
