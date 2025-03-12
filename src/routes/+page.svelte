@@ -37,49 +37,43 @@
 
 	const users = [
 		{
-			name: '<span>카리나</span>',
-			email: '<span>aespa@stamper.network</span>',
-			role: '<span>Admin</span>',
-			date: '<span>25 Apr, 2025</span>',
-			status: '<div class="status purple_gradient">PENDING</div>'
+			name: '카리나',
+			email: 'aespa@stamper.network',
+			role: 'Admin',
+			date: '25 Apr, 2025',
+			status: 'PENDING'
 		},
 		{
-			name: '<span>정동구</span>',
-			email: '<span>donggu@stamper.network</span>',
-			role: '<span>인턴</span>',
-			date: '<span>04 Mar, 2025</span>',
-			status: '<div class="status blue_gradient">APPROVED</div>'
+			name: '정동구',
+			email: 'donggu@stamper.network',
+			role: '인턴',
+			date: '04 Mar, 2025',
+			status: 'APPROVED'
 		},
 		{
-			name: '<span>장원영</span>',
-			email: '<span>ive@stamper.network</span>',
-			role: '<span>Subscriber</span>',
-			date: '<span>25 Apr, 2025</span>',
-			status: '<div class="status blue_gradient">APPROVED</div>'
+			name: '장원영',
+			email: 'ive@stamper.network',
+			role: 'Subscriber',
+			date: '25 Apr, 2025',
+			status: 'APPROVED'
 		},
 		{
-			name: '<span>피카츄</span>',
-			email: '<span>pocketmon@stamper.network</span>',
-			role: '<span>Admin</span>',
-			date: '<span>25 Apr, 2025</span>',
-			status: '<div class="status orange_gradient">REJECT</div>'
+			name: '피카츄',
+			email: 'pocketmon@stamper.network',
+			role: 'Admin',
+			date: '25 Apr, 2025',
+			status: 'REJECT'
 		},
 		{
-			name: '<span>윈터</span>',
-			email: '<span>aespa@stamper.network</span>',
-			role: '<span>Admin</span>',
-			date: '<span>25 Apr, 2025</span>',
-			status: '<div class="status purple_gradient">PENDING</div>'
+			name: '윈터',
+			email: 'aespa@stamper.network',
+			role: 'Admin',
+			date: '25 Apr, 2025',
+			status: 'PENDING'
 		}
 	];
 
-	const tableHeads = [
-		`<span>이름</span>`,
-		`<span>이메일</span>`,
-		`<span>사용자 유형</span>`,
-		`<span>상태</span>`,
-		`<span>가입일</span>`
-	];
+	const tableHeads = ['이름', '이메일', '사용자 유형', '상태', '가입일'];
 </script>
 
 <PageTitle title="Dashboard">

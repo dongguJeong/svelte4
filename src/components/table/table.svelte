@@ -22,14 +22,14 @@
 >
 	<thead>
 		{#each tableHeads as tablehead}
-			<th>{@html tablehead}</th>
+			<th>{tablehead}</th>
 		{/each}
 	</thead>
 	<tbody>
 		{#each tableDatas as tableData}
 			<tr>
 				{#each Object.values(tableData) as data}
-					<td>{@html data}</td>
+					<td>{data}</td>
 				{/each}
 			</tr>
 		{/each}

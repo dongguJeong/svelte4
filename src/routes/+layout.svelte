@@ -57,13 +57,6 @@
 			contrast(98%);
 	}
 
-	:global(.status) {
-		color: white;
-		font-weight: 500;
-		padding: 4px;
-		border-radius: 4px;
-	}
-
 	:global(.purple_gradient) {
 		background: var(--purple-gradient);
 	}

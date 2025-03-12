@@ -67,11 +67,9 @@
 			</Button>
 
 			{#each Buttons as { src, alt, badge, onClick }, i}
-				<Button onClick={onClick ?? (() => {})} variant="ghost">
+				<Button onClick={onClick ?? (() => {})} variant="ghost" style="position : relative;">
 					{#if badge}
-						<Badge variant="destructive">
-							<div class="red_badge" />
-						</Badge>
+						<Badge variant="destructive" />
 					{/if}
 					<img class="header__buttons_image" {src} {alt} />
 				</Button>
