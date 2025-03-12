@@ -23,7 +23,9 @@
 		if (e.target.value === '') {
 			return;
 		}
-		dispatch('change', e.target.value);
+		dispatch('change', {
+			text: e.target.value
+		});
 		value = '';
 	};
 </script>
@@ -35,7 +37,7 @@
 	{required}
 	{placeholder}
 	class={`${size} ${mode}`}
-	on:change
+	on:change={handleChange}
 />
 
 <style lang="scss">

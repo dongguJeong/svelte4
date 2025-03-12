@@ -19,72 +19,63 @@
 	});
 
 	const addTodo = (e) => {
-		console.log(e.target.value);
-		// const newText = String(e.target.value);
-		// const newTodo: ITodo = {
-		// 	newText,
-		// 	id: String(Date.now()),
-		// 	done: false
-		// };
-		// const newTodos = [...todos, newTodo];
+		const newText = String(e.detail.text);
+		const newTodo: ITodo = {
+			text: newText,
+			id: String(Date.now()),
+			done: false
+		};
+		const newTodos = [...todos, newTodo];
 
-		// saveTodos(newTodos);
-		// fetchTodo();
+		saveTodos(newTodos);
+		fetchTodo();
 	};
 
 	const deleteTodo = (e: Event) => {
 		console.log(e.target.parentElement.id);
 
-		// const ID = e.target.parentElement.id;
-		// const newTodos = todos.filter((todo) => todo.id !== ID);
-		// saveTodos(newTodos);
-		// fetchTodo();
+		const ID = e.target.parentElement.id;
+		const newTodos = todos.filter((todo) => todo.id !== ID);
+		saveTodos(newTodos);
+		fetchTodo();
 	};
 
 	const checkTodo = (e: Event) => {
-		console.log(e.target.parentElement.id);
-		console.log(e.detail.checked);
+		const ID = e.target.parentElement.id;
 
-		// console.log(e.target.parentElement.parentElement.parentElement.id);
+		const newTodos = todos.map((todo) =>
+			todo.id === ID
+				? {
+						...todo,
+						done: e.detail.checked
+				  }
+				: todo
+		);
 
-		// console.log(e.detail.checked);
-		// const ID = e.target.parentElement.parentElement.parentElement.id;
-
-		// console.log(ID);
-		// const newTodos = todos.map((todo) =>
-		// 	todo.id === ID
-		// 		? {
-		// 				...todo,
-		// 				done: !todo.done
-		// 		  }
-		// 		: todo
-		// );
-
-		// saveTodos(newTodos);
-		// fetchTodo();
+		saveTodos(newTodos);
+		fetchTodo();
 	};
 
 	const saveTodos = (newTodos: ITodo[]) => {
-		//localStorage.setItem('todos', JSON.stringify(newTodos));
+		localStorage.setItem('todos', JSON.stringify(newTodos));
 	};
 
 	const changeTodo = (e: Event) => {
-		console.log(e.target.parentElement.parentElement.parentElement.id);
-		// const ID = e.target.parentElement.id;
-		// console.log(ID);
-		// const newText = e.target.value;
+		const ID = e.target.parentElement.parentElement.parentElement.id;
 
-		// const newTodos = todos.map((todo) =>
-		// 	todo.id === ID
-		// 		? {
-		// 				...todo,
-		// 				text: newText
-		// 		  }
-		// 		: todo
-		// );
+		const newText = e.target.value;
 
-		// saveTodos(newTodos);
-		// fetchTodo();
+		const newTodos = todos.map((todo) =>
+			todo.id === ID
+				? {
+						...todo,
+						text: newText
+				  }
+				: todo
+		);
+
+		saveTodos(newTodos);
+		fetchTodo();
 	};
 
 	const koreaDate = (date: string) => {
@@ -97,14 +88,6 @@
 
 		return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
 	};
-
-	const handleChange = (e) => {
-		console.log(e.parentElement.parentElement);
-	};
-
-	const handleCheckboxChange = (e) => {
-		alert(`Checkbox is now ${e.detail.checked ? 'checked' : 'unchecked'}`);
-	};
 </script>
 
 <section>
@@ -112,7 +95,7 @@
 		<ContentsTitle slot="card_header" title="TodoList" />
 		<div slot="card_content">
 			<TextField
-				on:change={handleChange}
+				on:change={addTodo}
 				placeholder="Add Todo"
 				size="medium"
 				type="text"
