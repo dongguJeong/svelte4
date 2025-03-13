@@ -1,17 +1,11 @@
 <script lang="ts">
 	export let src: string = '';
-	export let width: number;
-	export let height: number;
-	export let border: 'gray' | 'black' | 'none' = 'none';
+	export let border: 'border' | 'none' = 'none';
+	export let size: 'small' | 'medium' | 'large' = 'medium';
+	export let style: string = '';
 </script>
 
-<div
-	class={`avatar ${border}`}
-	style="
-		width: {width}px;
-		height: {height}px;
-	"
->
+<div class={`avatar ${border} ${size}`} {style}>
 	<img {src} alt="avatar" />
 </div>
 
@@ -26,7 +20,7 @@
 			border-radius: 50%;
 		}
 
-		&.gray {
+		&.border {
 			border: 2px solid rgba(0, 0, 0, 0.3);
 		}
 
@@ -34,8 +28,19 @@
 			border: none;
 		}
 
-		&.black {
-			border: 2px solid rgba(0, 0, 0);
+		&.small {
+			width: 30px;
+			height: 30px;
+		}
+
+		&.medium {
+			width: 40px;
+			height: 40px;
+		}
+
+		&.large {
+			width: 50px;
+			height: 50px;
 		}
 	}
 </style>

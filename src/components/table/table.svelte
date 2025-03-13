@@ -1,24 +1,15 @@
 <script lang="ts">
-	export let backgroundColor: string = 'white';
-	export let border: string | undefined = 'none';
-	export let boxShadow: string | undefined = 'none';
-	export let textAlign: string | undefined = 'left';
-	export let padding: number | undefined = 10;
+	export let variant: 'striped' | 'border' | 'none' = 'none';
 	export let style: string | undefined = '';
-
 	export let tableHeads: any[] = [];
 	export let tableDatas: any[] = [];
 </script>
 
 <table
 	style="
-		background-color: {backgroundColor};
-		border: {border};
-		box-shadow: {boxShadow};
-		text-align: {textAlign};
-		padding: {padding}px;
 		{style}
 	"
+	class={variant}
 >
 	<thead>
 		{#each tableHeads as tablehead}
@@ -40,10 +31,22 @@
 <style lang="scss">
 	table {
 		border-radius: var(--border-radius);
-
+		background-color: white;
+		border: none;
 		th,
 		td {
 			padding: 6px 4px;
+		}
+
+		&.striped {
+			thead,
+			tr:nth-child(even) {
+				background-color: rgba(0, 0, 0, 0.05);
+			}
+		}
+
+		&.border {
+			border: 1px solid rgba(0, 0, 0, 0.2);
 		}
 	}
 </style>

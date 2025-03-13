@@ -53,7 +53,7 @@
 
 <aside class="sidebar" class:open={$isOpen}>
 	<div class="sidebar_profile">
-		<Avatar src="/svg/picachu.png" border="gray" width={40} height={40} />
+		<Avatar src="/svg/picachu.png" border="border" size="medium" />
 		<div>
 			<span>정동구</span>
 			<span>fronend developer</span>

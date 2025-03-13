@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { createEventDispatcher, onMount } from 'svelte';
 
-	export let defaultValue: string = '';
+	export let value: string = '';
 	export let placeholder: string = '';
 	export let type: string = 'text';
 	export let disabled: boolean = true;
 	export let required: boolean = false;
 	export let size: 'large' | 'medium' | 'small' = 'medium';
 	export let mode: 'standard' | 'filled' | 'outlined' = 'standard';
+
 	export const dispatch = createEventDispatcher();
 
-	let value = defaultValue;
 	let inputElement: HTMLInputElement;
 
 	onMount(() => {
@@ -24,9 +24,24 @@
 			return;
 		}
 		dispatch('change', {
-			text: e.target.value
+			text: e.target.value,
+			event: e
 		});
-		value = '';
+	};
+
+	const handleKeydown = (e: KeyboardEvent) => {
+		if (e.key !== 'Enter') {
+			return;
+		}
+		if (e.key === 'Enter') {
+			console.log('Enter');
+			console.log(e.target.value);
+			dispatch('enter', {
+				text: (e.target as HTMLInputElement).value,
+				event: e
+			});
+			value = '';
+		}
 	};
 </script>
 
@@ -38,6 +53,7 @@
 	{placeholder}
 	class={`${size} ${mode}`}
 	on:change={handleChange}
+	on:keydown={handleKeydown}
 />
 
 <style lang="scss">

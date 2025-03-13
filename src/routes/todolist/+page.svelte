@@ -4,9 +4,14 @@
 	import { TextField } from '../../components/textField';
 	import ContentsTitle from '../../components/title/contents-title.svelte';
 	import { TodoListItem, type ITodo } from '../../components/todolist';
+	import { Button } from '../../components/button';
 
 	let todos: ITodo[] = [];
-	let newTodo: string = '';
+	let search: string = '';
+	let selectedTodos: string[] = [];
+
+	$: result = todos.filter((todo) => todo.text.includes(search));
+	$: buttonDisabled = selectedTodos.length === 0;
 
 	const fetchTodo = () => {
 		if (localStorage.getItem('todos')) {
@@ -14,11 +19,17 @@
 		}
 	};
 
+	const saveTodos = (newTodos: ITodo[]) => {
+		localStorage.setItem('todos', JSON.stringify(newTodos));
+	};
+
 	onMount(() => {
 		fetchTodo();
 	});
 
-	const addTodo = (e) => {
+	/* AddTodo 관련 함수 */
+
+	const addTodo = (e: CustomEvent) => {
 		const newText = String(e.detail.text);
 		const newTodo: ITodo = {
 			text: newText,
@@ -32,17 +43,14 @@
 	};
 
 	const deleteTodo = (e: Event) => {
-		console.log(e.target.parentElement.id);
-
 		const ID = e.target.parentElement.id;
 		const newTodos = todos.filter((todo) => todo.id !== ID);
 		saveTodos(newTodos);
 		fetchTodo();
 	};
 
-	const checkTodo = (e: Event) => {
-		const ID = e.target.parentElement.id;
-
+	const checkTodo = (e: CustomEvent) => {
+		const ID = e.detail.event.target.parentElement.id;
 		const newTodos = todos.map((todo) =>
 			todo.id === ID
 				? {
@@ -56,14 +64,9 @@
 		fetchTodo();
 	};
 
-	const saveTodos = (newTodos: ITodo[]) => {
-		localStorage.setItem('todos', JSON.stringify(newTodos));
-	};
-
-	const changeTodo = (e: Event) => {
-		const ID = e.target.parentElement.parentElement.parentElement.id;
-
-		const newText = e.target.value;
+	const changeTodo = (e: CustomEvent) => {
+		const ID = e.detail.event.target.parentElement.parentElement.parentElement.id;
+		const newText = e.detail.text;
 
 		const newTodos = todos.map((todo) =>
 			todo.id === ID
@@ -78,15 +81,24 @@
 		fetchTodo();
 	};
 
-	const koreaDate = (date: string) => {
-		const newDate = new Date(Number(date));
-		const year = newDate.getFullYear();
-		const month = newDate.getMonth() + 1;
-		const day = newDate.getDate();
-		const hour = newDate.getHours();
-		const minute = newDate.getMinutes();
+	/* Filter 관련 함수 */
 
-		return `${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
+	const selectTodo = (e: CustomEvent) => {
+		const ID = e.detail.event.target.parentElement.id;
+		const isChecked = e.detail.checked;
+
+		if (isChecked) {
+			selectedTodos = [...selectedTodos, ID];
+		} else {
+			selectedTodos = selectedTodos.filter((todo) => todo !== ID);
+		}
+	};
+
+	const deleteSelectedTodos = () => {
+		const newTodos = todos.filter((todo) => !selectedTodos.includes(todo.id));
+		selectedTodos = [];
+		saveTodos(newTodos);
+		fetchTodo();
 	};
 </script>
 
@@ -95,7 +107,7 @@
 		<ContentsTitle slot="card_header" title="TodoList" />
 		<div slot="card_content">
 			<TextField
-				on:change={addTodo}
+				on:enter={addTodo}
 				placeholder="Add Todo"
 				size="medium"
 				type="text"
@@ -115,8 +127,31 @@
 			</ul>
 		</div>
 	</Card>
+
 	<Card>
 		<ContentsTitle slot="card_header" title="TodoList Filter" />
+		<div slot="card_content">
+			<div class="filter_todo_list_header">
+				<TextField bind:value={search} mode="outlined" size="medium" placeholder="find Todo" />
+
+				<Button disabled={buttonDisabled} onClick={deleteSelectedTodos}
+					>선택된 항목 : {selectedTodos.length} 개 삭제</Button
+				>
+			</div>
+			<ul>
+				{#each result as { id, done, text }}
+					<li {id}>
+						<TodoListItem
+							{id}
+							{text}
+							onCheck={selectTodo}
+							onChange={changeTodo}
+							onDelete={deleteTodo}
+						/>
+					</li>
+				{/each}
+			</ul>
+		</div>
 	</Card>
 </section>
 
@@ -135,17 +170,12 @@
 			gap: 10px;
 			padding-left: 0;
 			font-size: 16px;
-
-			.done {
-				text-decoration: line-through;
-				color: var(--gray);
-			}
 		}
 	}
 
-	@include small {
-		.main_todo_list span {
-			display: none;
-		}
+	.filter_todo_list_header {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
 	}
 </style>

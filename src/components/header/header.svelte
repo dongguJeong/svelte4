@@ -7,8 +7,9 @@
 	import { Badge } from '../badge';
 	import { Avatar } from '../avatar';
 
-	const handleChange = (e) => {
-		alert(e.target.value);
+	const handleChange = (e: Event) => {
+		const target = e.target as HTMLInputElement;
+		alert(target.value);
 	};
 
 	const toggleSidebar = () => {
@@ -58,18 +59,18 @@
 		</div>
 
 		<div class="header_buttons">
-			<Button onClick={() => {}} variant="ghost">
+			<Button variant="ghost">
 				<div class="header_profile">
-					<Avatar src="/svg/picachu.png" border="gray" width={20} height={20} />
+					<Avatar src="/svg/picachu.png" border="border" size="small" />
 					<span>정동구</span>
 					<img src="/svg/triangle.svg" alt="triangle" />
 				</div>
 			</Button>
 
 			{#each Buttons as { src, alt, badge, onClick }, i}
-				<Button onClick={onClick ?? (() => {})} variant="ghost" style="position : relative;">
+				<Button variant="ghost" style="position : relative;" {onClick}>
 					{#if badge}
-						<Badge variant="destructive" />
+						<Badge variant="red" />
 					{/if}
 					<img class="header__buttons_image" {src} {alt} />
 				</Button>
@@ -140,42 +141,6 @@
 			width: 20px;
 			height: 20px;
 			filter: var(--filter-gray);
-		}
-	}
-
-	.red_badge {
-		background-color: red;
-		position: absolute;
-		border-radius: 4px;
-		top: 0px;
-		right: 0px;
-		width: 4px;
-		height: 4px;
-	}
-
-	@include medium {
-		.header_title {
-			width: auto;
-		}
-		.header {
-			gap: 0;
-			justify-content: space-between;
-		}
-	}
-
-	@include small {
-		.header_buttons {
-			button:first-child {
-				display: none;
-			}
-
-			button:nth-child(2) {
-				display: none;
-			}
-
-			button:nth-child(3) {
-				display: none;
-			}
 		}
 	}
 </style>

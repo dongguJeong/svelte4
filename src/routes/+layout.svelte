@@ -69,6 +69,11 @@
 		background: var(--orange-gradient);
 	}
 
+	:global(.line-through) {
+		text-decoration: line-through;
+		color: var(--gray);
+	}
+
 	.root_layout {
 		display: flex;
 		flex-direction: column;

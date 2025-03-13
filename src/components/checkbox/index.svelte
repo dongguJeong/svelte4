@@ -1,23 +1,17 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let defaultValue: boolean = false;
+	export let checked: boolean = false;
 	export let disabled: boolean = false;
-	export let color: string = 'white';
-	export let backgroundColor: string = 'black';
-	export let height: number = 20;
-	export let width: number = 20;
+	export let size: 'small' | 'medium' | 'large' = 'medium';
 	export let style: string = '';
 
 	const dispatch = createEventDispatcher();
 
 	const handleClick = (e: MouseEvent) => {
 		const target = e.target as HTMLInputElement;
-		console.log(target.checked);
-		dispatch('change', { checked: target.checked });
+		dispatch('click', { checked: target.checked, event: e });
 	};
-
-	let checked = defaultValue;
 </script>
 
 <input
@@ -25,21 +19,35 @@
 	bind:checked
 	on:click={handleClick}
 	{disabled}
+	class={size}
 	style="
-        color: {color};
-        background-color: {backgroundColor};
-		width : {width}px;
-		height : {height}px;
-		{style}
+        {style}
     "
 />
 
 <style lang="scss">
 	input {
-		border-radius: var(--border-radius);
+		border-radius: 20px;
+		accent-color: rgb(34, 139, 34);
+
 		&:disabled {
 			opacity: 0.5;
 			cursor: not-allowed;
+		}
+
+		&.small {
+			width: 16px;
+			height: 16px;
+		}
+
+		&.medium {
+			width: 24px;
+			height: 24px;
+		}
+
+		&.large {
+			width: 32px;
+			height: 32px;
 		}
 	}
 </style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let variant: 'primary' | 'secondary' | 'destuctive' | 'outline' | 'ghost' | undefined =
+	export let variant: 'primary' | 'secondary' | 'error' | 'outline' | 'ghost' | undefined =
 		'primary';
 	export let disabled: boolean | undefined = false;
 	export let size: 'small' | 'medium' | 'large' | undefined = 'medium';
@@ -81,7 +81,7 @@
 			}
 		}
 
-		&.destuctive {
+		&.error {
 			background-color: var(--error);
 			color: white;
 
@@ -92,8 +92,12 @@
 
 		&:disabled {
 			color: white;
-			background-color: var(--secondary);
+			background-color: rgba(0, 0, 0, 0.2);
 			cursor: not-allowed;
+
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.2);
+			}
 		}
 	}
 </style>

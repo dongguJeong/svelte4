@@ -98,7 +98,13 @@
 <section class="dashboard_table_container">
 	<Card>
 		<ContentsTitle slot="card_header" title="Standard Table Design" />
-		<Table textAlign="center" slot="card_content" {tableHeads} tableDatas={users} />
+		<Table
+			variant="striped"
+			style="text-align : center;"
+			slot="card_content"
+			{tableHeads}
+			tableDatas={users}
+		/>
 	</Card>
 </section>
 
