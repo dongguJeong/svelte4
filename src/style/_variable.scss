@@ -1,2 +1,54 @@
 $breakpoint-small: 640px;
 $breakpoint-medium: 1024px;
+
+$rounded-none: 0px;
+$rounded-sm: 4px;
+$rounded-md: 10px;
+$rounded-lg: 100px;
+
+$primary-main: rgb(86, 181, 211);
+$primary-hover: rgb(86, 181, 211, 0.85);
+$primary-light: rgb(99, 211, 245);
+$primary-text: rgb(255, 255, 255);
+$primary-selected: rgb(86, 181, 211, 0.8);
+$primary-focus: rgb(86, 181, 211, 0.7);
+$primary-border: rgba(86, 181, 211, 0.5);
+
+$secondary-main: rgba(156, 39, 176, 1);
+$secondary-hover: rgba(123, 31, 162, 0.7);
+$secondary-light: rgba(186, 104, 200, 1);
+$secondary-text: rgb(255, 255, 255);
+$secondary-selected: rgba(156, 39, 176, 0.8);
+$secondary-focus: rgba(156, 39, 176, 0.7);
+$secondary-border: rgba(156, 39, 176, 0.5);
+
+$accent-main: rgb(239, 108, 0);
+$accent-hover: rgb(230, 81, 0, 0.7);
+$accent-light: rgb(255, 152, 0);
+$accent-text: rgb(255, 255, 255);
+$accent-selected: rgba(239, 108, 0.8);
+$accent-focus: rgba(239, 108, 0.7);
+$accent-border: rgba(239, 108, 0.5);
+
+$gray: rgb(144, 145, 142);
+$blue: rgb(105, 163, 234);
+$purple: rgb(193, 148, 250);
+$orange: rgb(253, 182, 134);
+
+$filter-white: invert(100%) sepia(9%) saturate(7472%) hue-rotate(184deg) brightness(109%)
+	contrast(110%);
+$filter-gray: invert(48%) sepia(4%) saturate(1725%) hue-rotate(175deg) brightness(93%) contrast(84%);
+$filter-primary: invert(65%) sepia(86%) saturate(259%) hue-rotate(150deg) brightness(83%)
+	contrast(98%);
+
+$box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+
+$padding-sm: 4px;
+$padding-md: 10px;
+$padding-lg: 20px;
+$padding-xl: 24px;
+$padding-xxl: 30px;
+
+$text-primary: rgba(0, 0, 0, 0.87);
+$text-secondary: rgba(0, 0, 0, 0.6);
+$text-disabled: rgba(0, 0, 0, 0.38);

@@ -1,30 +1,62 @@
 <script lang="ts">
+	export let rounded: 'sm' | 'md' | 'lg' | undefined = 'md';
+	export let shadow: boolean | undefined = false;
+	export let ghost: boolean | undefined = false;
+	export let padding: 'sm' | 'md' | 'lg' | undefined = 'lg';
 	export let style: string | undefined = '';
-	export let background: string | undefined = 'white';
-	export let gap: number | string | undefined = '10px';
-	export let flexDirection: string | undefined = 'column';
-	export let padding: number | undefined = 16;
+	export let full: boolean | undefined = false;
 </script>
 
 <div
 	class="card"
-	style="
-	gap: {typeof gap === 'number' ? `${gap}px` : gap};
-	flex-direction: {flexDirection};
-	background: {background};
-	padding: {padding}px;
+	data-full={full}
+	data-rounded={rounded}
+	data-padding={padding}
+	data-shadow={shadow}
+	data-ghost={ghost}
 	{style}
-"
 >
-	<slot name="card_header" />
-	<slot name="card_content" />
-	<slot name="card_footer" />
+	<slot />
 </div>
 
 <style lang="scss">
+	@import '../../style/mixin';
+	@import '../../style/variable';
 	.card {
-		display: flex;
-		border-radius: var(--border-md);
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		background-color: white;
+
+		&[data-rounded='sm'] {
+			border-radius: $rounded-sm;
+		}
+
+		&[data-rounded='md'] {
+			border-radius: $rounded-md;
+		}
+		&[data-rounded='lg'] {
+			border-radius: $rounded-lg;
+		}
+
+		&[data-shadow='true'] {
+			box-shadow: $box-shadow;
+		}
+
+		&[data-ghost='true'] {
+			background: transparent;
+		}
+
+		&[data-padding='sm'] {
+			padding: $padding-sm;
+		}
+
+		&[data-padding='md'] {
+			padding: $padding-md;
+		}
+		&[data-padding='lg'] {
+			padding: $padding-lg;
+		}
+
+		&[data-full='true'] {
+			width: 100%;
+		}
 	}
 </style>

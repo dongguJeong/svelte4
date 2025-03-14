@@ -8,7 +8,7 @@
 </div>
 
 <style lang="scss">
-	@import '../../style/mixin';
+	@import '../../style/variable';
 	.header_title {
 		width: 360px;
 		display: flex;
@@ -17,14 +17,8 @@
 
 		h1 {
 			font-size: 1.5rem;
-			color: var(--skyblue);
+			color: $primary-main;
 			font-weight: 800;
-		}
-	}
-
-	@include medium {
-		.header_title {
-			width: 200px;
 		}
 	}
 </style>

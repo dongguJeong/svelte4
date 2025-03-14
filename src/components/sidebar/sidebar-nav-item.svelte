@@ -14,14 +14,17 @@
 </a>
 
 <style lang="scss">
+	@import '../../style/variable';
+	@import '../../style/mixin';
 	a {
 		cursor: pointer;
 		list-style: none;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 10px 10px;
+		padding: $padding-md $padding-md;
 		width: 100%;
+		color: $text-secondary;
 
 		span {
 			font-weight: 600;
@@ -31,15 +34,15 @@
 		img {
 			width: 20px;
 			height: 20px;
-			filter: var(--filter-gray);
+			filter: $filter-gray;
 		}
 
 		&:hover {
-			background: var(--skyblue-gradient);
-			border-radius: 5px;
+			background: $primary-main;
+			border-radius: $rounded-md;
 
 			img {
-				filter: var(--filter-white);
+				filter: $filter-white;
 			}
 
 			span {
@@ -49,11 +52,11 @@
 	}
 
 	.active {
-		background: var(--skyblue-gradient);
-		border-radius: 5px;
+		background: $primary-main;
+		border-radius: $rounded-md;
 
 		img {
-			filter: var(--filter-white);
+			filter: $filter-white;
 		}
 
 		span {

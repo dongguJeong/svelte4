@@ -1,46 +1,62 @@
 <script lang="ts">
 	export let src: string = '';
-	export let border: 'border' | 'none' = 'none';
-	export let size: 'small' | 'medium' | 'large' = 'medium';
+	export let size: 'sm' | 'md' | 'lg' = 'md';
+	export let rounded: 'none' | 'sm' | 'md' | 'lg' = 'md';
+	export let border: boolean | undefined = false;
+	export let shadow: boolean | undefined = false;
 	export let style: string = '';
 </script>
 
-<div class={`avatar ${border} ${size}`} {style}>
-	<img {src} alt="avatar" />
-</div>
+<img
+	class="avatar"
+	{src}
+	data-size={size}
+	data-rounded={rounded}
+	data-border={border}
+	data-shadow={shadow}
+	{style}
+	alt="avatar"
+/>
 
 <style lang="scss">
+	@import '../../style/mixin';
+	@import '../../style/variable';
+
 	.avatar {
-		border-radius: 50%;
+		object-fit: cover;
 
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			border-radius: 50%;
+		&[data-size='sm'] {
+			width: 24px;
+			height: 24px;
 		}
 
-		&.border {
-			border: 2px solid rgba(0, 0, 0, 0.3);
+		&[data-size='md'] {
+			width: 32px;
+			height: 32px;
 		}
 
-		&.none {
-			border: none;
-		}
-
-		&.small {
-			width: 30px;
-			height: 30px;
-		}
-
-		&.medium {
+		&[data-size='sm'] {
 			width: 40px;
 			height: 40px;
 		}
 
-		&.large {
-			width: 50px;
-			height: 50px;
+		&[data-rounded='sm'] {
+			border-radius: $rounded-sm;
+		}
+
+		&[data-rounded='md'] {
+			border-radius: $rounded-md;
+		}
+		&[data-rounded='lg'] {
+			border-radius: $rounded-lg;
+		}
+
+		&[data-border='true'] {
+			border: 1.5px solid rgba(0, 0, 0, 0.4);
+		}
+
+		&[data-shadow='true'] {
+			box-shadow: $box-shadow;
 		}
 	}
 </style>

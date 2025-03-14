@@ -26,7 +26,7 @@
 		{
 			title: 'Components',
 			icon: '/svg/components.svg',
-			url: '#'
+			url: '/component'
 		},
 		{
 			title: 'Forms Stuff',
@@ -53,7 +53,7 @@
 
 <aside class="sidebar" class:open={$isOpen}>
 	<div class="sidebar_profile">
-		<Avatar src="/svg/picachu.png" border="border" size="medium" />
+		<Avatar src="/svg/picachu.png" border={true} size="md" rounded="lg" />
 		<div>
 			<span>정동구</span>
 			<span>fronend developer</span>
@@ -66,15 +66,11 @@
 		{/each}
 	</nav>
 
-	<Button variant="primary" size="medium">
-		<div class="sidebar_big_botton">
-			<span>Add Project</span>
-		</div>
-	</Button>
+	<Button variant="primary" size="lg" text="Add Project" />
 </aside>
 
 <style lang="scss">
-	@import '../../style/mixin';
+	@import '../../style/variable';
 	.sidebar {
 		display: flex;
 		flex-direction: column;
@@ -94,7 +90,7 @@
 				flex-direction: column;
 
 				span:nth-child(2) {
-					color: var(--gray);
+					color: $text-secondary;
 					font-size: 14px;
 				}
 			}
@@ -106,31 +102,6 @@
 			align-items: center;
 			gap: 10px;
 			color: var(--gray);
-		}
-	}
-
-	.sidebar_big_botton {
-		padding: 5px;
-	}
-
-	@include medium {
-		.sidebar {
-			z-index: 1000;
-			position: fixed;
-			top: 0;
-			left: -400px;
-			box-shadow: var(--box-shadow);
-			width: var(--sidebar-width);
-			transition: left 0.3s ease;
-		}
-
-		.open {
-			left: 0px !important;
-		}
-
-		.sidebar_big_botton_span {
-			color: white;
-			font-weight: 500;
 		}
 	}
 </style>

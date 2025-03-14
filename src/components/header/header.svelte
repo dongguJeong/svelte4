@@ -1,11 +1,11 @@
 <script lang="ts">
 	import HeaderTitle from './header-title.svelte';
-	import { TextField } from '../textField';
 	import { Button } from '../button';
 	import { open } from '../../store/sidebar-store';
 	import type { IButton } from '.';
 	import { Badge } from '../badge';
 	import { Avatar } from '../avatar';
+	import { TextInput } from '../text-Input';
 
 	const handleChange = (e: Event) => {
 		const target = e.target as HTMLInputElement;
@@ -42,37 +42,29 @@
 	<HeaderTitle title="blueBox" />
 	<div class="header_right">
 		<div class="header_input">
-			<TextField
-				on:change={handleChange}
-				placeholder="Search Project"
-				size="medium"
-				type="text"
-				mode="outlined"
-			>
-				<img
-					slot="icon-start"
-					src="/svg/magnifying.svg"
-					alt="magnifying"
-					class="header_input_img"
-				/>
-			</TextField>
+			<img src="/svg/magnifying.svg" alt="search" />
+			<TextInput placeholder="search" size="md" style="width : 100%;" />
 		</div>
 
 		<div class="header_buttons">
-			<Button variant="ghost">
-				<div class="header_profile">
-					<Avatar src="/svg/picachu.png" border="border" size="small" />
-					<span>정동구</span>
-					<img src="/svg/triangle.svg" alt="triangle" />
-				</div>
+			<Button ghost={true} text="정동구">
+				<Avatar
+					slot="left"
+					src="/svg/picachu.png"
+					border={true}
+					size="md"
+					rounded="lg"
+					style="margin-right : 20px;"
+				/>
+				<img slot="right" src="/svg/triangle.svg" alt="triangle" style="margin-left : 20px;" />
 			</Button>
 
 			{#each Buttons as { src, alt, badge, onClick }, i}
-				<Button variant="ghost" style="position : relative;" {onClick}>
+				<Button ghost={true} style="position : relative;" {onClick}>
 					{#if badge}
-						<Badge variant="red" />
+						<Badge variant="accent" />
 					{/if}
-					<img class="header__buttons_image" {src} {alt} />
+					<img slot="left" class="header__buttons_image" {src} {alt} />
 				</Button>
 			{/each}
 		</div>
@@ -97,50 +89,50 @@
 		justify-content: space-between;
 		width: 100%;
 
-		& > div:first-child {
+		.header_input {
 			width: 40%;
-		}
-	}
-
-	.header_input {
-		.header_input_img {
-			width: 18px;
-			height: 18px;
-			color: #e2e2e2;
-			filter: var(--filter-gray);
-		}
-	}
-
-	.header_buttons {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 20px;
-
-		.header_profile {
 			display: flex;
 			gap: 10px;
 			align-items: center;
-			font-size: 14px;
-			span {
-				color: var(--gray);
+			img {
+				width: 24px;
+				height: 24px;
+				filter: $filter-gray;
 			}
 		}
 
-		button:hover {
-			span {
-				color: var(--skyblue);
+		.header_buttons {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 20px;
+			color: $text-secondary;
+
+			button:hover {
+				span {
+					color: $primary-main;
+				}
 			}
 
 			img {
-				filter: var(--filter-skyblue);
-			}
-		}
+				width: 20px;
+				height: 20px;
+				filter: $filter-gray;
 
-		img {
-			width: 20px;
-			height: 20px;
-			filter: var(--filter-gray);
+				&:hover {
+					filter: filter-primary;
+				}
+			}
+
+			.header_profile {
+				display: flex;
+				gap: 10px;
+				align-items: center;
+				font-size: 14px;
+				span {
+					color: $text-secondary;
+				}
+			}
 		}
 	}
 </style>

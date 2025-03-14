@@ -1,103 +1,181 @@
 <script lang="ts">
-	export let variant: 'primary' | 'secondary' | 'error' | 'outline' | 'ghost' | undefined =
-		'primary';
+	export let variant: 'primary' | 'secondary' | 'accent' = 'primary';
+	export let size: 'sm' | 'md' | 'lg' = 'md';
+	export let border: boolean | undefined = false;
+	export let rounded: 'sm' | 'md' | 'lg' = 'md';
+	export let shadow: boolean | undefined = false;
+	export let ghost: boolean | undefined = false;
 	export let disabled: boolean | undefined = false;
-	export let size: 'small' | 'medium' | 'large' | undefined = 'medium';
-	export let style: string = '';
-	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
+	export let text: string | undefined = '';
+	export let full: boolean | undefined = false;
+	export let type: 'button' | 'submit' | 'reset' | undefined = 'button';
+	export let style: string | undefined = '';
 
 	export let onClick: ((event: MouseEvent) => void) | undefined = undefined;
 </script>
 
-<button on:click={onClick} {type} {disabled} class={`${size} ${variant}`} {style}>
-	<slot />
+<button
+	data-variant={variant}
+	data-size={size}
+	data-border={border}
+	data-rounded={rounded}
+	data-shadow={shadow}
+	data-ghost={ghost}
+	data-full={full}
+	on:click={onClick}
+	{type}
+	{disabled}
+	{style}
+>
+	<slot name="left" />
+	{text}
+	<slot name="right" />
 </button>
 
 <style lang="scss">
+	@import '../../style/mixin';
+	@import '../../style/variable';
 	button {
-		border: 0;
+		border: none;
 		outline: none;
-		position: relative;
 		display: flex;
 		align-items: center;
 		text-align: center;
 		justify-content: center;
 		cursor: pointer;
-		border-radius: var(--border-md);
-
-		&.large {
-			padding: 1rem 2rem;
-			font-size: 1.5rem;
-		}
-
-		&.medium {
-			padding: 0.5rem 1rem;
-			font-size: 1rem;
-		}
-
-		&.small {
-			padding: 0.25rem 0.75rem;
-			font-size: 0.75rem;
-		}
-
-		&.primary {
-			background-color: var(--skyblue);
-			color: white;
-			&:hover {
-				background-color: var(--skyblue);
-			}
-		}
-
-		&.secondary {
-			background-color: var(--secondary);
-			color: black;
-		}
-
-		&.outline {
-			background-color: white;
-			border: 1px solid rgba(0, 0, 0, 0.3);
-			color: black;
-
-			&:hover {
-				background-color: rgba(0, 0, 0, 0.1);
-			}
-		}
-
-		&.ghost {
-			background-color: transparent;
-			color: black;
-
-			&:hover {
-				background-color: var(--secondary-light);
-			}
-		}
-
-		&.link {
-			border: none;
-			background-color: white;
-
-			&:hover {
-				text-decoration: underline;
-			}
-		}
-
-		&.error {
-			background-color: var(--error);
-			color: white;
-
-			&:hover {
-				background-color: var(--error);
-			}
-		}
+		transition: background-color 0.3s, color 0.3s;
 
 		&:disabled {
-			color: white;
-			background-color: rgba(0, 0, 0, 0.2);
-			cursor: not-allowed;
+			@include disabled;
+		}
+		&[data-variant='primary'] {
+			color: $primary-text;
+			background-color: $primary-main;
+			&:hover {
+				background-color: $primary-hover;
+				::slotted(img) {
+					filter: $filter-white;
+				}
+			}
+			&:active {
+				background-color: $primary-selected;
+				::slotted(img) {
+					filter: $filter-white;
+				}
+			}
+		}
+
+		&[data-variant='secondary'] {
+			color: $secondary-text;
+			background-color: $secondary-main;
+			&:hover {
+				background-color: $secondary-hover;
+				::slotted(img) {
+					filter: $filter-white;
+				}
+			}
+			&:active {
+				background-color: $secondary-selected;
+			}
+		}
+
+		&[data-variant='accent'] {
+			color: $accent-text;
+			background-color: $accent-main;
+			transition: background-color 0.3s, color 0.3s;
 
 			&:hover {
-				background-color: rgba(0, 0, 0, 0.2);
+				background-color: $accent-hover;
 			}
+			&:active {
+				background-color: $accent-selected;
+			}
+		}
+
+		&[data-size='sm'] {
+			font-size: 14px;
+			padding: 4px 6px;
+			height: 28px;
+		}
+
+		&[data-size='md'] {
+			font-size: 16px;
+			padding: 6px 8px;
+			height: 32px;
+		}
+
+		&[data-size='lg'] {
+			font-size: 20px;
+			padding: 10px 12px;
+			height: 40px;
+		}
+
+		&[data-rounded='sm'] {
+			border-radius: $rounded-sm;
+		}
+
+		&[data-rounded='md'] {
+			border-radius: $rounded-md;
+		}
+
+		&[data-rounded='lg'] {
+			border-radius: $rounded-lg;
+		}
+
+		&[data-border='true'] {
+			&[data-variant='primary'] {
+				border: 1.5px solid $primary-border;
+			}
+			&[data-variant='secondary'] {
+				border: 1.5px solid $secondary-border;
+			}
+			&[data-variant='accent'] {
+				border: 1.5px solid $accent-border;
+			}
+		}
+
+		&[data-shadow='true'] {
+			box-shadow: $box-shadow;
+		}
+
+		&[data-ghost='true'] {
+			background: transparent;
+
+			&[data-variant='primary'] {
+				border: 1.5px solid $primary-border;
+				color: $primary-main;
+
+				&:hover {
+					background: $primary-main;
+					color: $primary-text;
+				}
+			}
+			&[data-variant='secondary'] {
+				border: 1.5px solid $secondary-border;
+				color: $secondary-main;
+
+				&:hover {
+					background: $secondary-main;
+					color: $secondary-text;
+				}
+			}
+			&[data-variant='accent'] {
+				border: 1.5px solid $accent-border;
+				color: $accent-main;
+
+				&:hover {
+					background: $primary-main;
+					color: $primary-text;
+				}
+			}
+
+			&[data-border='false'] {
+				border: none;
+			}
+		}
+
+		&[data-full='true'] {
+			width: 100%;
 		}
 	}
 </style>

@@ -1,53 +1,61 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
+	export let size: 'sm' | 'md' | 'lg' = 'md';
+	export let border: boolean | undefined = false;
+	export let rounded: 'sm' | 'md' | 'lg' = 'md';
+	export let shadow: boolean | undefined = false;
+	export let ghost: boolean | undefined = false;
 	export let checked: boolean = false;
 	export let disabled: boolean = false;
-	export let size: 'small' | 'medium' | 'large' = 'medium';
+	export let onClick: ((event: MouseEvent) => void) | undefined = undefined;
 	export let style: string = '';
-
-	const dispatch = createEventDispatcher();
-
-	const handleClick = (e: MouseEvent) => {
-		const target = e.target as HTMLInputElement;
-		dispatch('click', { checked: target.checked, event: e });
-	};
 </script>
 
 <input
 	type="checkbox"
 	bind:checked
-	on:click={handleClick}
+	on:click={onClick}
+	data-size={size}
+	data-border={border}
+	data-rounded={rounded}
+	data-shadow={shadow}
+	data-ghost={ghost}
 	{disabled}
-	class={size}
-	style="
-        {style}
-    "
+	{style}
 />
 
 <style lang="scss">
+	@import '../../style/variable';
+
 	input {
-		border-radius: 20px;
-		accent-color: rgb(34, 139, 34);
+		accent-color: $secondary-main;
 
 		&:disabled {
 			opacity: 0.5;
 			cursor: not-allowed;
 		}
-
-		&.small {
+		&[data-size='sm'] {
 			width: 16px;
 			height: 16px;
 		}
 
-		&.medium {
+		&[data-size='md'] {
 			width: 24px;
 			height: 24px;
 		}
 
-		&.large {
+		&[data-size='lg'] {
 			width: 32px;
 			height: 32px;
+		}
+
+		&[data-border='none'] {
+			border: none;
+		}
+
+		&[data-ghost='true'] {
+			background: transparent;
 		}
 	}
 </style>

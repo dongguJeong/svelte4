@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { Button } from '../button';
 	import { Checkbox } from '../checkbox';
-	import { TextField } from '../textField';
+	import { TextInput } from '../text-Input';
 
 	export let checked: boolean = false;
 	export let text: string = '';
-	export let onCheck: (e: any) => void;
-	export let onChange: (e: any) => void;
-	export let onDelete: (e: any) => void;
+	export let onCheck: ((e: any) => void) | undefined = undefined;
+	export let onChange: ((e: any) => void) | undefined = undefined;
+	export let onDelete: ((e: any) => void) | undefined = undefined;
+	export let onKeydown: ((e: any) => void) | undefined = undefined;
 	export let id = '';
 
 	const koreaDate = (date: string) => {
@@ -21,18 +22,10 @@
 </script>
 
 <li {id}>
-	<Checkbox on:click={onCheck} {checked} size="medium" />
-	<TextField
-		value={text}
-		on:change={onChange}
-		placeholder="Add Todo"
-		size="medium"
-		type="text"
-		mode="outlined"
-		className={checked ? 'line-through' : ''}
-	/>
+	<Checkbox on:click={onCheck} {checked} size="md" />
+	<TextInput bind:value={text} {onChange} {onKeydown} full={true} />
 	<span class:checked>{koreaDate(id)}</span>
-	<Button onClick={onDelete} variant="ghost">🗑️</Button>
+	<Button onClick={onDelete} ghost={true} text="🗑️" />
 </li>
 
 <style lang="scss">
