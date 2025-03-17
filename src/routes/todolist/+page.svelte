@@ -78,12 +78,11 @@
     todos = fetchTodo();
   };
 
-  const handleOnInput = (e: Event) => {
-    debounce(() => {
-      const target = e.target as HTMLInputElement;
-      search = target.value;
-    }, 300);
-  };
+  const handleOnInput = debounce((e: Event) => {
+    console.log('디바운스');
+    const target = e.target as HTMLInputElement;
+    search = target.value;
+  }, 200);
 </script>
 
 <section>
