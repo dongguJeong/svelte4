@@ -142,4 +142,11 @@
       }
     }
   }
+
+  @include screen-md {
+    section {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
