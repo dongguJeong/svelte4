@@ -79,8 +79,10 @@
   };
 
   const handleOnInput = (e: Event) => {
-    const target = e.target as HTMLInputElement;
-    search = target.value;
+    debounce(() => {
+      const target = e.target as HTMLInputElement;
+      search = target.value;
+    }, 300);
   };
 </script>
 
@@ -91,7 +93,7 @@
       <SearchBar full={true} placeholder="Add Todo" onSubmit={handleAddTodo} />
 
       <ul class="main_todo_list">
-        {#each todos as { id, done, text }}
+        {#each todos as { id, done, text } (id)}
           <TodoListItem
             {id}
             checked={done}

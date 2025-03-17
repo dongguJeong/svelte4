@@ -1,11 +1,11 @@
 export let debounce = (callback: Function, delay: number) => {
-  let timeId;
+  let timeId: number;
 
   return (...args: any[]) => {
     if (timeId) {
       clearTimeout(timeId);
     }
-    setTimeout(() => {
+    timeId = setTimeout(() => {
       callback(...args);
     }, delay);
   };
