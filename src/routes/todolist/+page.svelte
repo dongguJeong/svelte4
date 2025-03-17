@@ -12,11 +12,9 @@
     checkTodo,
     deleteSelectedTodos,
     deleteTodo,
-    fetchTodo,
-    onInput,
     selectTodo
   } from '../../util/todolist';
-  import { debounce } from '../../util/todolist/debounce';
+  import { debounce } from '../../util/debounce';
 
   let todos: ITodo[] = [];
   let search: string = '';
@@ -29,44 +27,60 @@
     todos = fetchTodo(todos);
   });
 
+  const fetchTodo = (): ITodo[] => {
+    if (localStorage.getItem('todos')) {
+      return JSON.parse(localStorage.getItem('todos') as string);
+    }
+    return todos;
+  };
+
+  const saveTodos = (newTodos: ITodo[]): void => {
+    localStorage.setItem('todos', JSON.stringify(newTodos));
+  };
+
   /* AddTodo 관련 함수 */
 
   const handleAddTodo = (e: Event) => {
-    addTodo(e, todos);
-    todos = fetchTodo(todos);
+    const newText = e.target.elements[0].value;
+    saveTodos(addTodo(newText, todos));
+    e.target.elements[0].value = '';
+    todos = fetchTodo();
   };
 
   const handleDeleteTodo = (id: string) => {
-    deleteTodo(id, todos);
-    todos = fetchTodo(todos);
+    saveTodos(deleteTodo(id, todos));
+    todos = fetchTodo();
   };
 
   const handleCheckTodo = (id: string) => {
-    checkTodo(id, todos);
-    todos = fetchTodo(todos);
+    saveTodos(checkTodo(id, todos));
+    todos = fetchTodo();
   };
 
   const handleChangeTodo = (id: string, e: Event) => {
-    changeTodo(id, e, todos);
-    todos = fetchTodo(todos);
+    const target = e.target as HTMLInputElement;
+    const newText = target.value;
+    saveTodos(changeTodo(id, newText, todos));
+    todos = fetchTodo();
   };
 
   /* Filter 관련 함수 */
 
   const handleSelectTodo = (id: string, e: Event) => {
-    selectedTodos = selectTodo(id, e, selectedTodos);
+    const target = e.target as HTMLInputElement;
+    const isChecked = target.checked;
+    selectedTodos = selectTodo(id, isChecked, selectedTodos);
   };
 
   const handleDeleteSelectedTodos = () => {
-    deleteSelectedTodos(todos, selectedTodos);
+    saveTodos(deleteSelectedTodos(todos, selectedTodos));
     selectedTodos = [];
-    todos = fetchTodo(todos);
+    todos = fetchTodo();
   };
 
   const handleOnInput = (e: Event) => {
-    debounce(() => {
-      search = onInput(e);
-    }, 200);
+    const target = e.target as HTMLInputElement;
+    search = target.value;
   };
 </script>
 
@@ -104,7 +118,7 @@
         />
       </div>
       <ul>
-        {#each result as { id, text }}
+        {#each result as { id, text } (id)}
           <TodoListItem {id} {text} onCheck={(e) => handleSelectTodo(id, e)} />
         {/each}
       </ul>
