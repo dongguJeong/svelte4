@@ -5,6 +5,18 @@
   import { Button } from '../../components/button';
   import { TextInput } from '../../components/text-Input';
   import { Title } from '../../components/title';
+  import { SearchBar } from '../../components/searchbar';
+  import {
+    addTodo,
+    changeTodo,
+    checkTodo,
+    deleteSelectedTodos,
+    deleteTodo,
+    fetchTodo,
+    onInput,
+    selectTodo
+  } from '../../util/todolist';
+  import { debounce } from '../../util/todolist/debounce';
 
   let todos: ITodo[] = [];
   let search: string = '';
@@ -13,106 +25,48 @@
   $: result = todos.filter((todo) => todo.text.includes(search));
   $: buttonDisabled = selectedTodos.length === 0;
 
-  const fetchTodo = () => {
-    if (localStorage.getItem('todos')) {
-      todos = JSON.parse(localStorage.getItem('todos') as string);
-    }
-  };
-
-  const saveTodos = (newTodos: ITodo[]) => {
-    localStorage.setItem('todos', JSON.stringify(newTodos));
-  };
-
   onMount(() => {
-    fetchTodo();
+    todos = fetchTodo(todos);
   });
 
   /* AddTodo 관련 함수 */
 
-  const onKeydown = (e: KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      console.log(e);
-      // const text = (e.target as HTMLInputElement).value;
-      // console.log(text);
-      // if (text) {
-      // 	addTodo(new CustomEvent('addTodo', { detail: { text } }));
-      // 	(e.target as HTMLInputElement).value = '';
-      // }
-    }
+  const handleAddTodo = (e: Event) => {
+    addTodo(e, todos);
+    todos = fetchTodo(todos);
   };
 
-  const addTodo = (e: Event) => {
-    console.log(e);
-    const newText = e.target.value;
-    if (!newText) return;
-    // const newTodo: ITodo = {
-    // 	text: newText,
-    // 	id: String(Date.now()),
-    // 	done: false
-    // };
-    // const newTodos = [...todos, newTodo];
-
-    // saveTodos(newTodos);
-    // fetchTodo();
+  const handleDeleteTodo = (id: string) => {
+    deleteTodo(id, todos);
+    todos = fetchTodo(todos);
   };
 
-  const deleteTodo = (e: Event) => {
-    const ID = e.target.parentElement.id;
-    const newTodos = todos.filter((todo) => todo.id !== ID);
-    saveTodos(newTodos);
-    fetchTodo();
+  const handleCheckTodo = (id: string) => {
+    checkTodo(id, todos);
+    todos = fetchTodo(todos);
   };
 
-  const checkTodo = (e: Event) => {
-    const ID = e.target.parentElement.id;
-    const newTodos = todos.map((todo) =>
-      todo.id === ID
-        ? {
-            ...todo,
-            done: e.detail.checked
-          }
-        : todo
-    );
-
-    saveTodos(newTodos);
-    fetchTodo();
-  };
-
-  const changeTodo = (e: Event) => {
-    const ID = e.target.parentElement.id;
-    const newText = e.target.value;
-
-    const newTodos = todos.map((todo) =>
-      todo.id === ID
-        ? {
-            ...todo,
-            text: newText
-          }
-        : todo
-    );
-
-    saveTodos(newTodos);
-    fetchTodo();
+  const handleChangeTodo = (id: string, e: Event) => {
+    changeTodo(id, e, todos);
+    todos = fetchTodo(todos);
   };
 
   /* Filter 관련 함수 */
 
-  const selectTodo = (e: CustomEvent) => {
-    const ID = e.target.parentElement.id;
-    const isChecked = e.target.checked;
-
-    if (isChecked) {
-      selectedTodos = [...selectedTodos, ID];
-    } else {
-      selectedTodos = selectedTodos.filter((todo) => todo !== ID);
-    }
+  const handleSelectTodo = (id: string, e: Event) => {
+    selectedTodos = selectTodo(id, e, selectedTodos);
   };
 
-  const deleteSelectedTodos = () => {
-    const newTodos = todos.filter((todo) => !selectedTodos.includes(todo.id));
+  const handleDeleteSelectedTodos = () => {
+    deleteSelectedTodos(todos, selectedTodos);
     selectedTodos = [];
-    saveTodos(newTodos);
-    fetchTodo();
+    todos = fetchTodo(todos);
+  };
+
+  const handleOnInput = (e: Event) => {
+    debounce(() => {
+      search = onInput(e);
+    }, 200);
   };
 </script>
 
@@ -120,16 +74,18 @@
   <Card>
     <div class="todolist_container">
       <Title text="TodoList" />
-      <TextInput variant="primary" size="md" placeholder="Add Todo" />
+      <SearchBar full={true} placeholder="Add Todo" onSubmit={handleAddTodo} />
+
       <ul class="main_todo_list">
         {#each todos as { id, done, text }}
           <TodoListItem
             {id}
             checked={done}
             {text}
-            onCheck={checkTodo}
-            onChange={addTodo}
-            onDelete={deleteTodo}
+            onCheck={() => handleCheckTodo(id)}
+            onDelete={() => handleDeleteTodo(id)}
+            onChange={(e) => handleChangeTodo(id, e)}
+            subText="완료"
           />
         {/each}
       </ul>
@@ -140,24 +96,16 @@
     <div class="todolist_container">
       <Title text="TodoList Filter" />
       <div class="filter_todo_list_header">
-        <TextInput variant="primary" size="md" placeholder="Filter Todo" />
+        <TextInput variant="primary" size="md" placeholder="Filter Todo" onInput={handleOnInput} />
         <Button
           disabled={buttonDisabled}
-          onClick={deleteSelectedTodos}
+          onClick={handleDeleteSelectedTodos}
           text={`선택된 항목 :  ${selectedTodos.length} 개 삭제`}
         />
       </div>
       <ul>
-        {#each result as { id, done, text }}
-          <li {id}>
-            <TodoListItem
-              {id}
-              {text}
-              onCheck={selectTodo}
-              onChange={changeTodo}
-              onDelete={deleteTodo}
-            />
-          </li>
+        {#each result as { id, text }}
+          <TodoListItem {id} {text} onCheck={(e) => handleSelectTodo(id, e)} />
         {/each}
       </ul>
     </div>

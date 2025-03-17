@@ -1,5 +1,5 @@
 $breakpoint-small: 640px;
-$breakpoint-medium: 1024px;
+$breakpoint-medium: 1200px;
 
 $rounded-none: 0px;
 $rounded-sm: 4px;
@@ -36,10 +36,10 @@ $purple: rgb(193, 148, 250);
 $orange: rgb(253, 182, 134);
 
 $filter-white: invert(100%) sepia(9%) saturate(7472%) hue-rotate(184deg) brightness(109%)
-	contrast(110%);
+  contrast(110%);
 $filter-gray: invert(48%) sepia(4%) saturate(1725%) hue-rotate(175deg) brightness(93%) contrast(84%);
 $filter-primary: invert(65%) sepia(86%) saturate(259%) hue-rotate(150deg) brightness(83%)
-	contrast(98%);
+  contrast(98%);
 
 $box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 
@@ -47,7 +47,7 @@ $padding-sm: 4px;
 $padding-md: 10px;
 $padding-lg: 20px;
 $padding-xl: 24px;
-$padding-xxl: 30px;
+$padding-2xl: 30px;
 
 $text-primary: rgba(0, 0, 0, 0.87);
 $text-secondary: rgba(0, 0, 0, 0.6);

@@ -1,13 +1,14 @@
 <script lang="ts">
   export let variant: 'striped' | 'normal' | undefined = 'normal';
   export let head: string[] = [];
-  export let body: any[] = []; // 에니 제거
+  export let body: Record<string, string>[] = [];
   export let border: boolean | undefined = false;
   export let shadow: boolean | undefined = false;
   export let rounded: 'sm' | 'md' | 'lg' | 'none' | undefined = 'none';
   export let ghost: boolean | undefined = false;
   export let full: boolean | undefined = false;
   export let padding: 'sm' | 'md' | 'lg' | undefined = 'lg';
+  export let textAlign: 'center' | 'left' | 'right' | undefined = 'center';
 
   export let style: string | undefined = '';
 </script>
@@ -20,6 +21,7 @@
   data-full={full}
   data-padding={padding}
   data-border={border}
+  data-align={textAlign}
   {style}
 >
   <thead>
@@ -44,6 +46,7 @@
   @import '../../style/variable';
 
   table {
+    font-size: 14px;
     border-radius: var(--border-radius);
     background-color: white;
     border: none;
@@ -61,6 +64,14 @@
 
     &[data-border='true'] {
       border: 1.5px solid rgba(0, 0, 0, 0.2);
+
+      tr {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      }
+
+      tr:last-child {
+        border-bottom: none;
+      }
     }
 
     &[data-rounded='sm'] {
@@ -98,6 +109,34 @@
       thead,
       tr:nth-child(even) {
         background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    &[data-align='center'] {
+      text-align: center;
+    }
+    &[data-align='left'] {
+      text-align: left;
+    }
+    &[data-align='right'] {
+      text-align: right;
+    }
+  }
+
+  @include screen-sm {
+    table {
+      thead {
+        display: none;
+      }
+
+      tbody {
+        border: 1px solid black;
+        tr {
+          width: 100%;
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+        }
       }
     }
   }

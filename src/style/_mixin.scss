@@ -1,20 +1,24 @@
 @import './variable';
 
 @mixin screen_md {
-	@media screen and (max-width: $breakpoint-medium) {
-		@content;
-	}
+  @media screen and (max-width: $breakpoint-medium) {
+    @content;
+  }
 }
 
 @mixin screen_sm {
-	@media screen and (max-width: $breakpoint-small) {
-		@content;
-	}
+  @media screen and (max-width: $breakpoint-small) {
+    @content;
+  }
 }
 
 @mixin disabled() {
-	border: rgb(217, 217, 217);
-	color: #{$text-disabled};
-	background-color: rgb(179, 179, 179);
-	cursor: not-allowed;
+  border: rgb(217, 217, 217);
+  color: #{$text-disabled};
+  background-color: rgb(179, 179, 179);
+  cursor: not-allowed;
+
+  &:hover {
+    background-color: rgb(179, 179, 179);
+  }
 }

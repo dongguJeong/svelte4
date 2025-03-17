@@ -80,7 +80,7 @@
   <img slot="left" alt="speed-meter" src="/svg/speed-meter.svg" class="title_img" />
 </Title>
 
-<section class="dashboard_list">
+<section class="dashboard_cards_container">
   {#each cards as { background, title, number, increased, icon }}
     <Card style={`background : ${background}`} padding="lg">
       <div class="dashboard_card">
@@ -98,22 +98,16 @@
   {/each}
 </section>
 
-<Card style="padding : 30px;">
+<Card padding="2xl">
   <div class="dashboard_table_container">
-    <Title size="sm" text="Standard Table Design" style="color : rgba(0, 0, 0, 0.6)" />
-
-    <Table
-      style="width : 100%; text-align : center;"
-      head={tableHeads}
-      body={users}
-      padding="lg"
-      variant="striped"
-    />
+    <Title size="sm" text="Standard Table Design" color="text-secondary" />
+    <Table head={tableHeads} body={users} padding="lg" variant="striped" />
   </div>
 </Card>
 
 <style lang="scss">
   @import '../style/variable';
+  @import '../style/mixin';
   .title_img {
     width: 40px;
     height: 40px;
@@ -123,7 +117,7 @@
     margin-right: 10px;
   }
 
-  .dashboard_list {
+  .dashboard_cards_container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
@@ -157,5 +151,11 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+
+  @include screen-md {
+    .dashboard_cards_container {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
