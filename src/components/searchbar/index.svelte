@@ -52,8 +52,8 @@
 </form>
 
 <style lang="scss">
-  @import '../../style/mixin';
-  @import '../../style/variable';
+  @use '../../style/mixin';
+  @use '../../style/variable';
 
   form {
     display: flex;
@@ -67,28 +67,28 @@
 
     &[data-variant='primary'] {
       &[data-border='true']:focus-within {
-        border: 2px solid $primary-focus;
+        border: 2px solid variable.$primary-focus;
       }
       &[data-border='false']:focus-within {
-        border-bottom: 2px solid $primary-focus;
+        border-bottom: 2px solid variable.$primary-focus;
       }
     }
 
     &[data-variant='secondary'] {
       &[data-border='true']:focus-within {
-        border: 2px solid $secondary-focus;
+        border: 2px solid variable.$secondary-focus;
       }
       &[data-border='false']:focus-within {
-        border-bottom: 2px solid $secondary-focus;
+        border-bottom: 2px solid variable.$secondary-focus;
       }
     }
 
     &[data-variant='accent'] {
       &[data-border='true']:focus-within {
-        border: 2px solid $accent-focus;
+        border: 2px solid variable.$accent-focus;
       }
       &[data-border='false']:focus-within {
-        border-bottom: 2px solid $accent-focus;
+        border-bottom: 2px solid variable.$accent-focus;
       }
     }
 
@@ -110,18 +110,18 @@
     }
 
     &[data-rounded='sm'] {
-      border-radius: $rounded-sm;
+      border-radius: variable.$rounded-sm;
     }
 
     &[data-rounded='md'] {
-      border-radius: $rounded-md;
+      border-radius: variable.$rounded-md;
     }
     &[data-rounded='lg'] {
-      border-radius: $rounded-lg;
+      border-radius: variable.$rounded-lg;
     }
 
     &[data-shadow='true'] {
-      box-shadow: $box-shadow;
+      box-shadow: variable.$box-shadow;
     }
 
     &[data-ghost='true'] {
@@ -133,7 +133,7 @@
     }
 
     &[data-disabled='true'] {
-      @include disabled;
+      @include mixin.disabled;
     }
 
     input {
@@ -142,7 +142,7 @@
       border: none;
       outline: none;
       background: transparent;
-      color: $text-primary;
+      color: variable.$text-primary;
 
       &::placeholder {
         opacity: 0.5;
@@ -150,7 +150,6 @@
 
       &[data-size='sm'] {
         font-size: 14px;
-
         height: 30px;
       }
       &[data-size='md'] {

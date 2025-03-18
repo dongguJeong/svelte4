@@ -35,11 +35,13 @@
 
   const onSubmit = (e: Event) => {
     e.preventDefault();
-    const newText = e.target.elements[0].value;
-
-    if (!newText) return;
-    goto(`/search/${newText}`);
-    e.target.elements[0].value = '';
+    const target = e.target as HTMLFormElement;
+    if (target && target.elements[0] instanceof HTMLInputElement) {
+      const newText = target.elements[0].value;
+      if (!newText) return;
+      goto(`/search/${newText}`);
+      target.elements[0].value = '';
+    }
   };
 </script>
 
@@ -83,7 +85,8 @@
 </header>
 
 <style lang="scss">
-  @import '../../style/mixin';
+  @use '../../style/mixin';
+  @use '../../style/variable';
   .header {
     display: flex;
     align-items: center;
@@ -103,7 +106,7 @@
     .search_icon {
       width: 18px;
       height: 18px;
-      filter: $filter-gray;
+      filter: variable.$filter-gray;
     }
 
     .header_buttons {
@@ -111,39 +114,31 @@
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      color: $text-secondary;
-
-      .header_button_profile_right_icon {
-        margin-right: 20px;
-      }
+      color: variable.$text-secondary;
 
       img {
         width: 20px;
         height: 20px;
-        filter: $filter-gray;
+        filter: variable.$filter-gray;
 
         &:hover {
-          filter: filter-primary;
+          filter: variable.$filter-primary;
         }
       }
     }
   }
 
-  @include screen-md {
+  @include mixin.screen-md {
     .header {
       gap: 0px;
 
       .header_buttons {
         gap: 10px;
       }
-
-      .profile_right_icon {
-        margin-right: 10px;
-      }
     }
   }
 
-  @include screen-sm {
+  @include mixin.screen-sm {
     .header_button_profile {
       display: none;
     }

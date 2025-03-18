@@ -46,14 +46,14 @@
 />
 
 <style lang="scss">
-  @import '../../style/mixin';
-  @import '../../style/variable';
+  @use '../../style/mixin';
+  @use '../../style/variable';
 
   input {
     border: none;
     outline: none;
     background-color: white;
-    color: $text-primary;
+    color: variable.$text-primary;
     border-bottom: 1px solid rgba(0, 0, 0, 0.23);
 
     &::placeholder {
@@ -61,7 +61,7 @@
     }
 
     &:disabled {
-      @include disabled;
+      @include mixin.disabled;
     }
 
     &[data-border='true'] {
@@ -70,28 +70,28 @@
 
     &[data-variant='primary'] {
       &[data-border='true']:focus {
-        border: 2px solid $primary-focus;
+        border: 2px solid variable.$primary-focus;
       }
       &[data-border='false']:focus {
-        border-bottom: 2px solid $primary-focus;
+        border-bottom: 2px solid variable.$primary-focus;
       }
     }
 
     &[data-variant='secondary'] {
       &[data-border='true']:focus {
-        border: 2px solid $secondary-focus;
+        border: 2px solid variable.$secondary-focus;
       }
       &[data-border='false']:focus {
-        border-bottom: 2px solid $secondary-focus;
+        border-bottom: 2px solid variable.$secondary-focus;
       }
     }
 
     &[data-variant='accent'] {
       &[data-border='true']:focus {
-        border: 2px solid $accent-focus;
+        border: 2px solid variable.$accent-focus;
       }
       &[data-border='false']:focus {
-        border-bottom: 2px solid $accent-focus;
+        border-bottom: 2px solid variable.$accent-focus;
       }
     }
 
@@ -114,18 +114,18 @@
     }
 
     &[data-rounded='sm'] {
-      border-radius: $rounded-sm;
+      border-radius: variable.$rounded-sm;
     }
 
     &[data-rounded='md'] {
-      border-radius: $rounded-md;
+      border-radius: variable.$rounded-md;
     }
     &[data-rounded='lg'] {
-      border-radius: $rounded-lg;
+      border-radius: variable.$rounded-lg;
     }
 
     &[data-shadow='true'] {
-      box-shadow: $box-shadow;
+      box-shadow: variable.$box-shadow;
     }
 
     &[data-ghost='true'] {

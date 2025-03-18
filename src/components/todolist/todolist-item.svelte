@@ -29,7 +29,7 @@
 </li>
 
 <style lang="scss">
-  @import '../../style/variable';
+  @use '../../style/variable';
   li {
     width: 100%;
     display: flex;
@@ -40,19 +40,9 @@
       width: 100%;
       align-items: center;
 
-      .text {
-        width: 70%;
-        font-size: 16px;
-        padding: 6px 12px;
-        height: 34px;
-        color: $text-primary;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.23);
-        cursor: not-allowed;
-      }
-
       span {
         font-size: 14px;
-        color: $text-secondary;
+        color: variable.$text-secondary;
       }
     }
   }

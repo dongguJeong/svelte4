@@ -22,7 +22,7 @@
 </div>
 
 <style lang="scss">
-  @import '../../style/variable';
+  @use '../../style/variable';
 
   .badge {
     position: absolute;
@@ -33,18 +33,18 @@
     top: 0;
 
     &[data-variant='primary'] {
-      color: $primary-text;
-      background-color: $primary-main;
+      color: variable.$primary-text;
+      background-color: variable.$primary-main;
     }
 
     &[data-variant='secondary'] {
-      color: $secondary-text;
-      background-color: $secondary-main;
+      color: variable.$secondary-text;
+      background-color: variable.$secondary-main;
     }
 
     &[data-variant='accent'] {
-      color: $accent-text;
-      background-color: $accent-main;
+      color: variable.$accent-text;
+      background-color: variable.$accent-main;
     }
 
     &[data-size='sm'] {
@@ -65,25 +65,25 @@
 
     &[data-border='true'] {
       &[data-variant='primary'] {
-        border: 1px solid $primary-border;
+        border: 1px solid variable.$primary-border;
       }
       &[data-variant='secondary'] {
-        border: 1px solid $secondary-border;
+        border: 1px solid variable.$secondary-border;
       }
       &[data-variant='accent'] {
-        border: 1px solid $accent-border;
+        border: 1px solid variable.$accent-border;
       }
     }
 
     &[data-rounded='sm'] {
-      border-radius: $rounded-sm;
+      border-radius: variable.$rounded-sm;
     }
 
     &[data-rounded='md'] {
-      border-radius: $rounded-md;
+      border-radius: variable.$rounded-md;
     }
     &[data-rounded='lg'] {
-      border-radius: $rounded-lg;
+      border-radius: variable.$rounded-lg;
     }
 
     &[data-ghost='true'] {
@@ -91,7 +91,7 @@
     }
 
     &[data-shadow='true'] {
-      box-shadow: $box-shadow;
+      box-shadow: variable.$box-shadow;
     }
   }
 </style>

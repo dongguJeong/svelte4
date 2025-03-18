@@ -8,8 +8,8 @@
 </div>
 
 <style lang="scss">
-  @import '../../style/variable';
-  @import '../../style/mixin';
+  @use '../../style/variable';
+  @use '../../style/mixin';
 
   .header_title {
     width: 360px;
@@ -20,12 +20,12 @@
 
     a {
       font-size: 1.5rem;
-      color: $primary-main;
+      color: variable.$primary-main;
       font-weight: 800;
     }
   }
 
-  @include screen-md {
+  @include mixin.screen-md {
     .header_title {
       width: 180px;
     }

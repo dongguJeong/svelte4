@@ -12,11 +12,11 @@
 </div>
 
 <style lang="scss">
-  @import '../../style/variable';
+  @use '../../style/variable';
   .title {
     display: flex;
     align-items: center;
-    color: $text-primary;
+    color: variable.$text-primary;
     font-weight: 600;
 
     &[data-size='sm'] {
@@ -32,11 +32,11 @@
     }
 
     &[data-color='text-primary'] {
-      color: $text-primary;
+      color: variable.$text-primary;
     }
 
     &[data-color='text-secondary'] {
-      color: $text-secondary;
+      color: variable.$text-secondary;
     }
   }
 </style>

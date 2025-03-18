@@ -19,11 +19,11 @@
 />
 
 <style lang="scss">
-  @import '../../style/mixin';
-  @import '../../style/variable';
+  @use '../../style/mixin';
+  @use '../../style/variable';
 
   .avatar {
-    object-fit: cover;
+    object-fit: contain;
 
     &[data-size='sm'] {
       width: 24px;
@@ -41,14 +41,14 @@
     }
 
     &[data-rounded='sm'] {
-      border-radius: $rounded-sm;
+      border-radius: variable.$rounded-sm;
     }
 
     &[data-rounded='md'] {
-      border-radius: $rounded-md;
+      border-radius: variable.$rounded-md;
     }
     &[data-rounded='lg'] {
-      border-radius: $rounded-lg;
+      border-radius: variable.$rounded-lg;
     }
 
     &[data-border='true'] {
@@ -56,7 +56,7 @@
     }
 
     &[data-shadow='true'] {
-      box-shadow: $box-shadow;
+      box-shadow: variable.$box-shadow;
     }
   }
 </style>

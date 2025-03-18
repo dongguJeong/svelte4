@@ -70,28 +70,29 @@
 </aside>
 
 <style lang="scss">
-  @import '../../style/variable';
-  @import '../../style/mixin';
+  @use '../../style/variable';
+  @use '../../style/mixin';
   .sidebar {
     display: flex;
     flex-direction: column;
     gap: 20px;
     background: white;
     padding: 60px 40px;
-    width: var(--sidebar-width);
+    width: variable.$sidebar-width;
     height: 100%;
 
     .sidebar_profile {
       display: flex;
       align-items: center;
       gap: 10px;
+      padding-left: 10px;
 
       div {
         display: flex;
         flex-direction: column;
 
         span:nth-child(2) {
-          color: $text-secondary;
+          color: variable.$text-secondary;
           font-size: 14px;
         }
       }
@@ -102,11 +103,11 @@
       flex-direction: column;
       align-items: center;
       gap: 10px;
-      color: var(--gray);
+      color: variable.$text-secondary;
     }
   }
 
-  @include screen-md {
+  @include mixin.screen-md {
     .sidebar {
       position: fixed;
       left: -100%;

@@ -2,14 +2,7 @@
   import { Title } from '../components/title';
   import { Card } from '../components/card';
   import { Table } from '../components/table';
-
-  interface ICard {
-    title: string;
-    icon: string;
-    number: number;
-    increased: number;
-    background: string;
-  }
+  import { DashboardCard, type ICard } from '../components/dashboard';
 
   const cards: ICard[] = [
     {
@@ -82,19 +75,7 @@
 
 <section class="dashboard_cards_container">
   {#each cards as { background, title, number, increased, icon }}
-    <Card style={`background : ${background}`} padding="lg">
-      <div class="dashboard_card">
-        <img src={icon} alt="chart" class="dashboard_card_icon" />
-        <div class="dashboard_card_content">
-          <div class="dashboard_card_title">{title}</div>
-          <div class="dashboard_card_number">${number}</div>
-        </div>
-
-        <div class="dashboard_card_increased">
-          Increased by {increased}%
-        </div>
-      </div>
-    </Card>
+    <DashboardCard {background} {title} {number} {increased} {icon} />
   {/each}
 </section>
 
@@ -106,14 +87,14 @@
 </Card>
 
 <style lang="scss">
-  @import '../style/variable';
-  @import '../style/mixin';
+  @use '../style/variable';
+  @use '../style/mixin';
   .title_img {
     width: 40px;
     height: 40px;
     padding: 5px;
     border-radius: 5px;
-    background: $primary-light;
+    background: variable.$primary-light;
     margin-right: 10px;
   }
 
@@ -122,29 +103,6 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
     color: white;
-
-    .dashboard_card {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-
-      img {
-        width: 30px;
-        height: 30px;
-        filter: $filter-white;
-      }
-
-      .dashboard_card_content {
-        display: flex;
-        flex-direction: column;
-        font-size: larger;
-        font-weight: 600;
-      }
-
-      .dashboard_card_increased {
-        font-size: large;
-      }
-    }
   }
 
   .dashboard_table_container {
@@ -153,7 +111,7 @@
     gap: 20px;
   }
 
-  @include screen-md {
+  @include mixin.screen-md {
     .dashboard_cards_container {
       grid-template-columns: 1fr;
     }

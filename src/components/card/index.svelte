@@ -20,24 +20,24 @@
 </div>
 
 <style lang="scss">
-  @import '../../style/mixin';
-  @import '../../style/variable';
+  @use '../../style/mixin';
+  @use '../../style/variable';
   .card {
     background-color: white;
 
     &[data-rounded='sm'] {
-      border-radius: $rounded-sm;
+      border-radius: variable.$rounded-sm;
     }
 
     &[data-rounded='md'] {
-      border-radius: $rounded-md;
+      border-radius: variable.$rounded-md;
     }
     &[data-rounded='lg'] {
-      border-radius: $rounded-lg;
+      border-radius: variable.$rounded-lg;
     }
 
     &[data-shadow='true'] {
-      box-shadow: $box-shadow;
+      box-shadow: variable.$box-shadow;
     }
 
     &[data-ghost='true'] {
@@ -45,21 +45,21 @@
     }
 
     &[data-padding='sm'] {
-      padding: $padding-sm;
+      padding: variable.$padding-sm;
     }
 
     &[data-padding='md'] {
-      padding: $padding-md;
+      padding: variable.$padding-md;
     }
     &[data-padding='lg'] {
-      padding: $padding-lg;
+      padding: variable.$padding-lg;
     }
 
     &[data-padding='xl'] {
-      padding: $padding-xl;
+      padding: variable.$padding-xl;
     }
     &[data-padding='2xl'] {
-      padding: $padding-2xl;
+      padding: variable.$padding-2xl;
     }
 
     &[data-full='true'] {

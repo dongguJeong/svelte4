@@ -33,8 +33,8 @@
 </button>
 
 <style lang="scss">
-  @import '../../style/mixin';
-  @import '../../style/variable';
+  @use '../../style/mixin';
+  @use '../../style/variable';
   button {
     border: none;
     outline: none;
@@ -46,45 +46,45 @@
     transition: background-color 0.3s, color 0.3s;
 
     &[data-variant='primary'] {
-      color: $primary-text;
-      background-color: $primary-main;
+      color: variable.$primary-text;
+      background-color: variable.$primary-main;
       &:hover {
-        background-color: $primary-hover;
+        background-color: variable.$primary-hover;
         ::slotted(img) {
-          filter: $filter-white;
+          filter: variable.$filter-white;
         }
       }
       &:active {
-        background-color: $primary-selected;
+        background-color: variable.$primary-selected;
         ::slotted(img) {
-          filter: $filter-white;
+          filter: variable.$filter-white;
         }
       }
     }
 
     &[data-variant='secondary'] {
-      color: $secondary-text;
-      background-color: $secondary-main;
+      color: variable.$secondary-text;
+      background-color: variable.$secondary-main;
       &:hover {
-        background-color: $secondary-hover;
+        background-color: variable.$secondary-hover;
         ::slotted(img) {
-          filter: $filter-white;
+          filter: variable.$filter-white;
         }
       }
       &:active {
-        background-color: $secondary-selected;
+        background-color: variable.$secondary-selected;
       }
     }
 
     &[data-variant='accent'] {
-      color: $accent-text;
-      background-color: $accent-main;
+      color: variable.$accent-text;
+      background-color: variable.$accent-main;
 
       &:hover {
-        background-color: $accent-hover;
+        background-color: variable.$accent-hover;
       }
       &:active {
-        background-color: $accent-selected;
+        background-color: variable.$accent-selected;
       }
     }
 
@@ -107,61 +107,61 @@
     }
 
     &[data-rounded='sm'] {
-      border-radius: $rounded-sm;
+      border-radius: variable.$rounded-sm;
     }
 
     &[data-rounded='md'] {
-      border-radius: $rounded-md;
+      border-radius: variable.$rounded-md;
     }
 
     &[data-rounded='lg'] {
-      border-radius: $rounded-lg;
+      border-radius: variable.$rounded-lg;
     }
 
     &[data-border='true'] {
       &[data-variant='primary'] {
-        border: 1.5px solid $primary-border;
+        border: 1.5px solid variable.$primary-border;
       }
       &[data-variant='secondary'] {
-        border: 1.5px solid $secondary-border;
+        border: 1.5px solid variable.$secondary-border;
       }
       &[data-variant='accent'] {
-        border: 1.5px solid $accent-border;
+        border: 1.5px solid variable.$accent-border;
       }
     }
 
     &[data-shadow='true'] {
-      box-shadow: $box-shadow;
+      box-shadow: variable.$box-shadow;
     }
 
     &[data-ghost='true'] {
       background: transparent;
 
       &[data-variant='primary'] {
-        border: 1.5px solid $primary-border;
-        color: $primary-main;
+        border: 1.5px solid variable.$primary-border;
+        color: variable.$primary-main;
 
         &:hover {
-          background: $primary-main;
-          color: $primary-text;
+          background: variable.$primary-main;
+          color: variable.$primary-text;
         }
       }
       &[data-variant='secondary'] {
-        border: 1.5px solid $secondary-border;
-        color: $secondary-main;
+        border: 1.5px solid variable.$secondary-border;
+        color: variable.$secondary-main;
 
         &:hover {
-          background: $secondary-main;
-          color: $secondary-text;
+          background: variable.$secondary-main;
+          color: variable.$secondary-text;
         }
       }
       &[data-variant='accent'] {
-        border: 1.5px solid $accent-border;
-        color: $accent-main;
+        border: 1.5px solid variable.$accent-border;
+        color: variable.$accent-main;
 
         &:hover {
-          background: $primary-main;
-          color: $primary-text;
+          background: variable.$accent-main;
+          color: variable.$accent-text;
         }
       }
 
@@ -175,7 +175,7 @@
     }
 
     &:disabled {
-      @include disabled;
+      @include mixin.disabled;
     }
   }
 </style>

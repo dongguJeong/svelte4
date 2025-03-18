@@ -24,10 +24,10 @@
 />
 
 <style lang="scss">
-  @import '../../style/variable';
+  @use '/src/style/variable';
 
   input {
-    accent-color: $secondary-main;
+    accent-color: variable.$secondary-main;
 
     &:disabled {
       opacity: 0.5;

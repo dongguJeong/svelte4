@@ -24,7 +24,7 @@
   $: buttonDisabled = selectedTodos.length === 0;
 
   onMount(() => {
-    todos = fetchTodo(todos);
+    todos = fetchTodo();
   });
 
   const fetchTodo = (): ITodo[] => {
@@ -41,10 +41,14 @@
   /* AddTodo 관련 함수 */
 
   const handleAddTodo = (e: Event) => {
-    const newText = e.target.elements[0].value;
-    saveTodos(addTodo(newText, todos));
-    e.target.elements[0].value = '';
-    todos = fetchTodo();
+    const target = e.target as HTMLFormElement;
+    e.preventDefault();
+    if (target && target.elements[0] instanceof HTMLInputElement) {
+      const newText = target.elements[0].value;
+      saveTodos(addTodo(newText, todos));
+      target.elements[0].value = '';
+      todos = fetchTodo();
+    }
   };
 
   const handleDeleteTodo = (id: string) => {
@@ -58,8 +62,7 @@
   };
 
   const handleChangeTodo = (id: string, e: Event) => {
-    const target = e.target as HTMLInputElement;
-    const newText = target.value;
+    const newText = (e.target as HTMLInputElement).value;
     saveTodos(changeTodo(id, newText, todos));
     todos = fetchTodo();
   };
@@ -67,8 +70,7 @@
   /* Filter 관련 함수 */
 
   const handleSelectTodo = (id: string, e: Event) => {
-    const target = e.target as HTMLInputElement;
-    const isChecked = target.checked;
+    const isChecked = (e.target as HTMLInputElement).checked;
     selectedTodos = selectTodo(id, isChecked, selectedTodos);
   };
 
@@ -79,7 +81,6 @@
   };
 
   const handleOnInput = debounce((e: Event) => {
-    console.log('디바운스');
     const target = e.target as HTMLInputElement;
     search = target.value;
   }, 200);
@@ -128,7 +129,7 @@
 </section>
 
 <style lang="scss">
-  @import '../../style/mixin';
+  @use '../../style/mixin';
   section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -158,7 +159,7 @@
     }
   }
 
-  @include screen-md {
+  @include mixin.screen-md {
     section {
       display: grid;
       grid-template-columns: 1fr;

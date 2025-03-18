@@ -42,17 +42,17 @@
 </table>
 
 <style lang="scss">
-  @import '../../style/mixin';
-  @import '../../style/variable';
+  @use '../../style/mixin';
+  @use '../../style/variable';
 
   table {
     font-size: 14px;
-    border-radius: var(--border-radius);
+    border-radius: variable.$rounded-md;
     background-color: white;
     border: none;
 
     &[data-shadow='true'] {
-      box-shadow: $box-shadow;
+      box-shadow: variable.$box-shadow;
     }
 
     &[data-ghost='true'] {
@@ -75,14 +75,14 @@
     }
 
     &[data-rounded='sm'] {
-      border-radius: $rounded-sm;
+      border-radius: variable.$rounded-sm;
     }
 
     &[data-rounded='md'] {
-      border-radius: $rounded-md;
+      border-radius: variable.$rounded-md;
     }
     &[data-rounded='lg'] {
-      border-radius: $rounded-lg;
+      border-radius: variable.$rounded-lg;
     }
 
     &[data-padding='sm'] {
@@ -123,7 +123,7 @@
     }
   }
 
-  @include screen-sm {
+  @include mixin.screen-sm {
     table {
       thead {
         display: none;
